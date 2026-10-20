@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DermaVeda – Premium Skin & Hair Clinic</title>
+<meta name="description" content="DermaVeda – Pune's premier skin and hair clinic. Expert dermatology, hair transplant, PRP, laser treatments. Book your consultation today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+/* ===== RESET & ROOT ===== */
+:root {
+  --ivory:#FAF8F5;--cream:#F4EFE8;--sage:#8BA888;--deep-sage:#4A6B47;
+  --gold:#C9A96E;--gold-light:#E8D5B0;--charcoal:#1E1E1E;--slate:#3D3D3D;
+  --muted:#7A7A7A;--light-muted:#B8B4AE;--white:#FFFFFF;--teal:#2A7B7C;
+  --teal-light:#E0F0F0;--rose:#C4776A;--border:rgba(139,168,136,0.2);
+  --shadow-soft:0 8px 40px rgba(0,0,0,0.06);--shadow-med:0 16px 60px rgba(0,0,0,0.1);
+  --radius-sm:8px;--radius-md:16px;--radius-lg:28px;--radius-xl:40px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Manrope',sans-serif;background:var(--ivory);color:var(--charcoal);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit;cursor:pointer}
+button{cursor:pointer;font-family:'Manrope',sans-serif}
+
+/* ===== PAGE SYSTEM ===== */
+.page{display:none;min-height:100vh;padding-top:80px}
+.page.active{display:block}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:18px 5%;display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.4s ease;
+}
+nav.scrolled{background:rgba(250,248,245,0.95);backdrop-filter:blur(20px);padding:12px 5%;box-shadow:0 1px 0 rgba(0,0,0,0.06)}
+nav.solid{background:rgba(250,248,245,0.97);backdrop-filter:blur(20px);padding:12px 5%;box-shadow:0 1px 0 rgba(0,0,0,0.06)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--sage),var(--deep-sage));border-radius:10px;display:flex;align-items:center;justify-content:center}
+.nav-logo-mark svg{width:18px;height:18px;fill:white}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal);letter-spacing:0.02em}
+.nav-brand span{color:var(--sage)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:13px;font-weight:500;color:var(--slate);letter-spacing:0.04em;text-transform:uppercase;transition:color 0.3s;padding:4px 0;border-bottom:2px solid transparent}
+.nav-links a:hover,.nav-links a.active-link{color:var(--deep-sage);border-bottom-color:var(--sage)}
+.nav-cta{background:var(--deep-sage);color:white;padding:10px 22px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.3s;border:none}
+.nav-cta:hover{background:var(--charcoal);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--charcoal);border-radius:2px;transition:all 0.3s}
+.mobile-nav{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(250,248,245,0.98);backdrop-filter:blur(20px);padding:20px 5%;z-index:999;box-shadow:0 10px 40px rgba(0,0,0,0.1);flex-direction:column;gap:4px}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-size:15px;font-weight:500;color:var(--slate);padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.06);text-transform:uppercase;letter-spacing:0.04em}
+
+/* ===== UTILITY ===== */
+section{padding:100px 5%}
+.container{max-width:1200px;margin:0 auto;padding:0 5%}
+.section-tag{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:12px;display:block}
+.section-title{font-size:clamp(32px,4vw,56px);font-weight:300;line-height:1.15;color:var(--charcoal);margin-bottom:16px}
+.section-title em{font-style:italic;color:var(--deep-sage)}
+.section-sub{font-size:16px;color:var(--muted);max-width:520px;line-height:1.8}
+.section-header{margin-bottom:60px}
+.section-header.centered{text-align:center}
+.section-header.centered .section-sub{margin:0 auto}
+.btn-primary{background:var(--deep-sage);color:white;padding:14px 32px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:none;transition:all 0.3s;box-shadow:0 4px 20px rgba(74,107,71,0.25)}
+.btn-primary:hover{background:var(--charcoal);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
+.btn-outline{background:transparent;color:var(--charcoal);padding:14px 32px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:1.5px solid rgba(30,30,30,0.2);transition:all 0.3s}
+.btn-outline:hover{border-color:var(--deep-sage);color:var(--deep-sage)}
+.btn-gold{background:var(--gold);color:white;padding:14px 32px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:none;transition:all 0.3s}
+.btn-gold:hover{background:#b8924e;transform:translateY(-2px)}
+
+/* PAGE HERO (inner pages) */
+.page-hero{background:linear-gradient(135deg,var(--charcoal) 0%,#2d3a2d 100%);padding:80px 5%;text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(139,168,136,0.12) 0%,transparent 70%);pointer-events:none}
+.page-hero-tag{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:16px}
+.page-hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,68px);font-weight:300;color:white;line-height:1.1;margin-bottom:16px}
+.page-hero-title em{font-style:italic;color:var(--sage)}
+.page-hero-sub{font-size:16px;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto 28px;line-height:1.8}
+.breadcrumb{display:flex;justify-content:center;gap:8px;font-size:13px;color:rgba(255,255,255,0.4);margin-top:20px}
+.breadcrumb span{color:rgba(255,255,255,0.7)}
+.breadcrumb a{color:var(--sage)}
+.breadcrumb a:hover{color:white}
+
+/* ===== HOME PAGE ===== */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 5% 80px;gap:60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 80% 50%,rgba(139,168,136,0.1) 0%,transparent 70%),radial-gradient(ellipse 40% 50% at 20% 80%,rgba(201,169,110,0.07) 0%,transparent 60%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(139,168,136,0.15);border:1px solid rgba(139,168,136,0.3);border-radius:50px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--deep-sage);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--sage);border-radius:50%}
+.hero-title{font-size:clamp(42px,5.5vw,80px);font-weight:300;line-height:1.1;color:var(--charcoal);margin-bottom:24px}
+.hero-title em{font-style:italic;color:var(--deep-sage)}
+.hero-subtitle{font-size:16px;color:var(--muted);max-width:420px;line-height:1.8;margin-bottom:40px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero-trust{display:flex;gap:32px;margin-top:56px;padding-top:40px;border-top:1px solid var(--border)}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--charcoal);line-height:1}
+.hero-stat-label{font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:0.04em}
+.hero-visual{position:relative}
+.hero-img-wrap{width:100%;aspect-ratio:4/5;border-radius:var(--radius-xl);overflow:hidden;position:relative}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover}
+.hero-float-card{position:absolute;background:rgba(255,255,255,0.93);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.8);border-radius:var(--radius-md);padding:16px 20px;box-shadow:0 12px 40px rgba(0,0,0,0.1)}
+.hero-float-card.c1{bottom:40px;left:-30px;min-width:200px}
+.hero-float-card.c2{top:40px;right:-20px;min-width:160px}
+.float-card-label{font-size:11px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px}
+.float-card-val{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal)}
+.float-card-sub{font-size:12px;color:var(--sage);margin-top:2px;font-weight:500}
+.float-stars{display:flex;gap:3px;margin-bottom:6px}
+.float-stars span{color:var(--gold);font-size:14px}
+
+/* TRUST BAR */
+.trust-bar{background:var(--charcoal);padding:60px 5%;display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-item{padding:36px;text-align:center;position:relative}
+.trust-item:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;bottom:20%;width:1px;background:rgba(255,255,255,0.1)}
+.trust-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:white;line-height:1;margin-bottom:8px}
+.trust-num span{color:var(--gold)}
+.trust-label{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:0.06em}
+
+/* TREATMENTS GRID */
+.treatments-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.treatment-card{background:white;border-radius:var(--radius-lg);padding:36px 32px;position:relative;overflow:hidden;transition:all 0.4s ease;border:1px solid rgba(0,0,0,0.04)}
+.treatment-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage),var(--deep-sage));transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.treatment-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.1)}
+.treatment-card:hover::before{transform:scaleX(1)}
+.treatment-icon{width:56px;height:56px;background:var(--teal-light);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;transition:background 0.3s}
+.treatment-card:hover .treatment-icon{background:rgba(139,168,136,0.2)}
+.treatment-icon svg{width:26px;height:26px;stroke:var(--teal);stroke-width:1.5;fill:none}
+.treatment-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:10px}
+.treatment-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.treatment-link{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--deep-sage);display:flex;align-items:center;gap:6px}
+.treatment-link svg{width:14px;height:14px;transition:transform 0.3s}
+.treatment-card:hover .treatment-link svg{transform:translateX(4px)}
+.treatment-card.featured{background:var(--deep-sage)}
+.treatment-card.featured .treatment-name,.treatment-card.featured .treatment-desc{color:rgba(255,255,255,0.9)}
+.treatment-card.featured .treatment-icon{background:rgba(255,255,255,0.15)}
+.treatment-card.featured .treatment-icon svg{stroke:white}
+.treatment-card.featured .treatment-link{color:var(--gold-light)}
+.treatment-card.featured::before{display:none}
+
+/* BEFORE AFTER */
+.ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ba-card{border-radius:var(--radius-md);overflow:hidden;position:relative;aspect-ratio:3/4;cursor:pointer}
+.ba-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;filter:grayscale(15%)}
+.ba-card:hover img{transform:scale(1.04);filter:grayscale(0%)}
+.ba-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,30,30,0.75) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;opacity:0;transition:opacity 0.4s}
+.ba-card:hover .ba-overlay{opacity:1}
+.ba-tag{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.ba-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:white;font-weight:400}
+.ba-pill{position:absolute;top:16px;left:16px;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;color:var(--deep-sage);letter-spacing:0.06em;text-transform:uppercase}
+
+/* DOCTOR ABOUT */
+.about-section{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.doctor-img-wrap{position:relative}
+.doctor-img{width:100%;aspect-ratio:3/4;border-radius:var(--radius-xl);overflow:hidden}
+.doctor-img img{width:100%;height:100%;object-fit:cover}
+.doctor-badge{position:absolute;bottom:30px;right:-20px;background:white;border-radius:var(--radius-md);padding:20px 24px;box-shadow:var(--shadow-med)}
+.doctor-badge-title{font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-bottom:4px}
+.doctor-badge-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--charcoal)}
+.doctor-badge-creds{font-size:12px;color:var(--sage);font-weight:500;margin-top:4px}
+.credentials{margin-top:32px;display:flex;flex-direction:column;gap:16px}
+.cred-item{display:flex;gap:14px;align-items:flex-start}
+.cred-icon{width:40px;height:40px;flex-shrink:0;background:rgba(139,168,136,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.cred-icon svg{width:18px;height:18px;stroke:var(--deep-sage);stroke-width:1.5;fill:none}
+.cred-label{font-size:13px;font-weight:600;color:var(--charcoal);margin-bottom:2px}
+.cred-sub{font-size:13px;color:var(--muted)}
+
+/* TESTIMONIALS */
+.testimonials-section{background:var(--charcoal);overflow:hidden;padding:100px 0}
+.testi-header{padding:0 5%;margin-bottom:50px;text-align:center}
+.testimonials-section .section-title{color:white}
+.testimonials-section .section-tag{color:var(--gold)}
+.testimonials-section .section-sub{color:rgba(255,255,255,0.5)}
+.testimonials-track-wrap{overflow:hidden;padding:20px 0}
+.testimonials-track{display:flex;gap:24px;animation:scroll-left 30s linear infinite;width:max-content}
+.testimonials-track:hover{animation-play-state:paused}
+@keyframes scroll-left{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.testi-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-md);padding:32px 28px;min-width:340px;max-width:340px;flex-shrink:0;transition:background 0.3s;margin-left:12px}
+.testi-card:hover{background:rgba(255,255,255,0.1)}
+.testi-stars{display:flex;gap:4px;margin-bottom:16px}
+.testi-stars span{color:var(--gold);font-size:15px}
+.testi-quote{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;line-height:1.5;color:rgba(255,255,255,0.85);margin-bottom:24px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--sage)}
+.testi-avatar img{width:100%;height:100%;object-fit:cover}
+.testi-name{font-size:14px;font-weight:600;color:white}
+.testi-treat{font-size:12px;color:var(--gold);margin-top:2px}
+
+/* BOOKING SECTION */
+.booking-section{background:linear-gradient(135deg,var(--deep-sage) 0%,#2D5530 100%);position:relative;overflow:hidden}
+.booking-section::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:rgba(255,255,255,0.04);border-radius:50%;pointer-events:none}
+.booking-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative}
+.booking-info .section-title{color:white}
+.booking-info .section-tag{color:var(--gold)}
+.booking-info .section-sub{color:rgba(255,255,255,0.65)}
+.booking-features{margin-top:36px;display:flex;flex-direction:column;gap:16px}
+.booking-feat{display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.8);font-size:14px}
+.booking-feat svg{width:18px;height:18px;stroke:var(--gold);stroke-width:2;fill:none;flex-shrink:0}
+.booking-form-wrap{background:rgba(255,255,255,0.97);border-radius:var(--radius-lg);padding:44px 40px;box-shadow:0 30px 80px rgba(0,0,0,0.2)}
+.form-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal);margin-bottom:28px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:12px;font-weight:600;color:var(--slate);letter-spacing:0.04em;text-transform:uppercase}
+.form-control{border:1.5px solid rgba(0,0,0,0.1);border-radius:var(--radius-sm);padding:12px 16px;font-size:14px;font-family:'Manrope',sans-serif;background:var(--ivory);color:var(--charcoal);outline:none;transition:border-color 0.3s;width:100%}
+.form-control:focus{border-color:var(--sage);background:white}
+.form-control::placeholder{color:var(--light-muted)}
+select.form-control{cursor:pointer}
+textarea.form-control{resize:vertical;min-height:100px}
+.form-submit{width:100%;margin-top:8px;background:var(--deep-sage);color:white;padding:16px;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;font-family:'Manrope',sans-serif;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+.form-submit:hover{background:var(--charcoal)}
+.form-note{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+.success-msg{display:none;text-align:center;padding:24px;background:rgba(139,168,136,0.12);border:1px solid rgba(139,168,136,0.3);border-radius:var(--radius-sm);color:var(--deep-sage);font-weight:500;margin-top:16px}
+
+/* BLOG GRID */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.blog-card{border-radius:var(--radius-md);overflow:hidden;background:white;border:1px solid rgba(0,0,0,0.05);transition:all 0.4s ease;cursor:pointer}
+.blog-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-med)}
+.blog-img{aspect-ratio:16/9;overflow:hidden}
+.blog-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.blog-card:hover .blog-img img{transform:scale(1.05)}
+.blog-body{padding:24px}
+.blog-cat{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+.blog-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;line-height:1.3;color:var(--charcoal);margin-bottom:12px}
+.blog-excerpt{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.blog-meta{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(0,0,0,0.06);padding-top:16px}
+.blog-date{font-size:12px;color:var(--light-muted)}
+.blog-read{font-size:12px;font-weight:600;color:var(--deep-sage);letter-spacing:0.04em}
+
+/* FAQ */
+.faq-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.faq-list{display:flex;flex-direction:column;gap:4px}
+.faq-item{border-radius:var(--radius-sm);overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:white;cursor:pointer;font-size:15px;font-weight:500;color:var(--charcoal);transition:background 0.2s;border:none;width:100%;text-align:left}
+.faq-q:hover{background:rgba(139,168,136,0.08)}
+.faq-q.active{background:var(--deep-sage);color:white}
+.faq-icon{width:24px;height:24px;flex-shrink:0;transition:transform 0.3s}
+.faq-icon line{stroke:currentColor;stroke-width:2;transition:opacity 0.3s}
+.faq-q.active .faq-icon{transform:rotate(45deg)}
+.faq-a{background:rgba(139,168,136,0.08);max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;font-size:14px;color:var(--muted);line-height:1.8;padding:0 24px}
+.faq-a.open{max-height:300px;padding:20px 24px}
+
+/* FOOTER */
+footer{background:var(--charcoal);padding:80px 5% 40px;color:rgba(255,255,255,0.6)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:40px}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:white;margin-bottom:12px}
+.footer-brand span{color:var(--sage)}
+.footer-desc{font-size:14px;line-height:1.8;max-width:280px}
+.footer-socials{display:flex;gap:12px;margin-top:24px}
+.social-btn{width:40px;height:40px;border:1px solid rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all 0.3s;cursor:pointer;background:none}
+.social-btn:hover{background:var(--sage);border-color:var(--sage)}
+.social-btn svg{width:16px;height:16px;stroke:rgba(255,255,255,0.7);stroke-width:1.5;fill:none}
+.footer-col-title{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:white;margin-bottom:20px}
+.footer-links{display:flex;flex-direction:column;gap:12px}
+.footer-links a{font-size:14px;color:rgba(255,255,255,0.5);transition:color 0.3s}
+.footer-links a:hover{color:var(--sage)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.footer-bottom a{color:var(--sage)}
+
+/* FLOATING BTN */
+.floating-book{position:fixed;bottom:30px;right:30px;z-index:999;background:var(--deep-sage);color:white;padding:14px 24px;border-radius:50px;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;box-shadow:0 8px 30px rgba(74,107,71,0.4);border:none;display:flex;align-items:center;gap:8px;transition:all 0.3s;animation:float-pulse 3s ease-in-out infinite}
+.floating-book:hover{transform:translateY(-2px)!important;background:var(--charcoal)}
+@keyframes float-pulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.floating-book svg{width:16px;height:16px;stroke:white;stroke-width:2;fill:none}
+
+/* ===== TREATMENT DETAIL PAGE ===== */
+.treatment-detail-hero{background:linear-gradient(135deg,#1a2e1a 0%,var(--deep-sage) 100%);padding:100px 5% 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.treatment-detail-img{border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:4/3}
+.treatment-detail-img img{width:100%;height:100%;object-fit:cover}
+.treatment-steps{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.step-card{background:white;border-radius:var(--radius-md);padding:24px;border-left:4px solid var(--sage)}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--sage);margin-bottom:8px}
+.step-title{font-size:15px;font-weight:600;color:var(--charcoal);margin-bottom:6px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.7}
+.treatment-info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.info-box{background:rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:24px;text-align:center;border:1px solid rgba(255,255,255,0.1)}
+.info-box-label{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px}
+.info-box-val{font-family:'Cormorant Garamond',serif;font-size:24px;color:white;font-weight:600}
+.side-sticky{position:sticky;top:100px}
+.booking-side-card{background:white;border-radius:var(--radius-lg);padding:36px;box-shadow:var(--shadow-med)}
+.price-tag{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:var(--charcoal)}
+.price-note{font-size:13px;color:var(--muted);margin-top:4px}
+.benefit-list{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.benefit-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--slate)}
+.benefit-item svg{width:18px;height:18px;stroke:var(--sage);stroke-width:2;fill:none;flex-shrink:0}
+
+/* ===== BLOG DETAIL PAGE ===== */
+.blog-detail-grid{display:grid;grid-template-columns:2fr 1fr;gap:60px;padding:60px 5%}
+.blog-detail-content{max-width:720px}
+.blog-detail-hero-img{width:100%;aspect-ratio:16/7;border-radius:var(--radius-md);overflow:hidden;margin-bottom:40px}
+.blog-detail-hero-img img{width:100%;height:100%;object-fit:cover}
+.blog-detail-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,52px);font-weight:300;line-height:1.2;color:var(--charcoal);margin-bottom:20px}
+.blog-author-row{display:flex;align-items:center;gap:12px;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.blog-author-avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;background:var(--sage);flex-shrink:0}
+.blog-author-avatar img{width:100%;height:100%;object-fit:cover}
+.blog-author-name{font-size:14px;font-weight:600;color:var(--charcoal)}
+.blog-author-role{font-size:12px;color:var(--muted)}
+.blog-meta-row{display:flex;gap:20px;font-size:12px;color:var(--muted)}
+.blog-detail-body{font-size:16px;line-height:1.9;color:var(--slate)}
+.blog-detail-body h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--charcoal);margin:40px 0 16px}
+.blog-detail-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin:28px 0 12px}
+.blog-detail-body p{margin-bottom:20px}
+.blog-detail-body ul{margin:16px 0 24px 20px;display:flex;flex-direction:column;gap:8px}
+.blog-detail-body li{color:var(--slate)}
+.blog-callout{background:rgba(139,168,136,0.1);border-left:4px solid var(--sage);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:20px 24px;margin:28px 0;font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--deep-sage);line-height:1.5}
+.blog-sidebar{position:sticky;top:100px}
+.sidebar-card{background:white;border-radius:var(--radius-md);padding:28px;border:1px solid rgba(0,0,0,0.06);margin-bottom:24px}
+.sidebar-card-title{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--charcoal);margin-bottom:16px}
+.recent-post{display:flex;gap:12px;margin-bottom:16px;cursor:pointer}
+.recent-post:last-child{margin-bottom:0}
+.recent-post-img{width:60px;height:60px;border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0}
+.recent-post-img img{width:100%;height:100%;object-fit:cover}
+.recent-post-title{font-size:13px;font-weight:500;color:var(--charcoal);line-height:1.4;margin-bottom:4px}
+.recent-post-date{font-size:11px;color:var(--muted)}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
+.tag{background:rgba(139,168,136,0.12);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--deep-sage);cursor:pointer;transition:all 0.2s}
+.tag:hover{background:var(--deep-sage);color:white}
+
+/* GALLERY PAGE */
+.gallery-filters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;justify-content:center}
+.filter-btn{background:white;border:1.5px solid rgba(0,0,0,0.1);border-radius:50px;padding:8px 20px;font-size:13px;font-weight:500;color:var(--slate);cursor:pointer;transition:all 0.3s}
+.filter-btn.active,.filter-btn:hover{background:var(--deep-sage);border-color:var(--deep-sage);color:white}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gallery-item{border-radius:var(--radius-md);overflow:hidden;position:relative;cursor:pointer;aspect-ratio:4/3;background:var(--cream)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.7),transparent);padding:20px;opacity:0;transition:opacity 0.3s}
+.gallery-item:hover .gallery-label{opacity:1}
+.gallery-label-text{color:white;font-size:14px;font-weight:500}
+.gallery-label-cat{color:var(--gold);font-size:12px;margin-top:2px}
+
+/* ABOUT PAGE */
+.about-hero-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px}
+.value-card{background:white;border-radius:var(--radius-md);padding:32px;text-align:center;border:1px solid rgba(0,0,0,0.05);transition:all 0.3s}
+.value-card:hover{box-shadow:var(--shadow-med);transform:translateY(-4px)}
+.value-icon{width:64px;height:64px;background:rgba(139,168,136,0.1);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.value-icon svg{width:28px;height:28px;stroke:var(--deep-sage);stroke-width:1.5;fill:none}
+.value-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:10px;color:var(--charcoal)}
+.value-desc{font-size:14px;color:var(--muted);line-height:1.7}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.team-card{text-align:center}
+.team-img{aspect-ratio:1;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px}
+.team-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.team-card:hover .team-img img{transform:scale(1.04)}
+.team-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:4px}
+.team-role{font-size:13px;color:var(--sage);font-weight:500}
+.team-bio{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7}
+
+/* CONTACT PAGE */
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;align-items:start}
+.contact-info-item{display:flex;gap:16px;margin-bottom:28px;align-items:flex-start}
+.contact-icon{width:48px;height:48px;background:rgba(139,168,136,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:20px;height:20px;stroke:var(--deep-sage);stroke-width:1.5;fill:none}
+.contact-info-label{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.contact-info-val{font-size:15px;font-weight:500;color:var(--charcoal);line-height:1.6}
+.map-embed{width:100%;height:300px;border-radius:var(--radius-md);overflow:hidden;background:var(--cream);border:1px solid var(--border);margin-top:32px;display:flex;align-items:center;justify-content:center}
+
+/* TREATMENTS LIST PAGE */
+.treatments-list-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.treatment-list-card{background:white;border-radius:var(--radius-lg);overflow:hidden;display:flex;gap:0;transition:all 0.4s;border:1px solid rgba(0,0,0,0.05);cursor:pointer}
+.treatment-list-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-med)}
+.treatment-list-img{width:180px;flex-shrink:0;overflow:hidden}
+.treatment-list-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.treatment-list-card:hover .treatment-list-img img{transform:scale(1.06)}
+.treatment-list-body{padding:28px 24px;flex:1}
+.treatment-list-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:8px}
+.treatment-list-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+.treatment-list-tags{display:flex;gap:8px;flex-wrap:wrap}
+.treatment-list-tag{background:rgba(139,168,136,0.1);border-radius:50px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--deep-sage)}
+
+/* TESTIMONIALS PAGE */
+.testi-page-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testi-page-card{background:white;border-radius:var(--radius-md);padding:32px;border:1px solid rgba(0,0,0,0.06);transition:all 0.3s}
+.testi-page-card:hover{box-shadow:var(--shadow-med);transform:translateY(-4px)}
+.testi-page-stars{color:var(--gold);font-size:18px;margin-bottom:16px;letter-spacing:2px}
+.testi-page-quote{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--charcoal);line-height:1.6;margin-bottom:24px}
+.testi-page-author-wrap{display:flex;align-items:center;gap:12px}
+.testi-page-avatar{width:48px;height:48px;border-radius:50%;background:var(--cream);overflow:hidden}
+.testi-page-avatar img{width:100%;height:100%;object-fit:cover}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;padding-top:140px}
+  .hero-visual{max-width:480px;margin:0 auto}
+  .trust-bar{grid-template-columns:repeat(2,1fr)}
+  .treatments-grid{grid-template-columns:repeat(2,1fr)}
+  .about-section{grid-template-columns:1fr;gap:40px}
+  .booking-wrap{grid-template-columns:1fr}
+  .faq-wrap{grid-template-columns:1fr;gap:40px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:40px}
+  .blog-grid{grid-template-columns:repeat(2,1fr)}
+  .ba-grid{grid-template-columns:repeat(2,1fr)}
+  .blog-detail-grid{grid-template-columns:1fr}
+  .blog-sidebar{position:static}
+  .treatment-detail-hero{grid-template-columns:1fr}
+  .treatment-steps{grid-template-columns:1fr}
+  .treatment-info-grid{grid-template-columns:repeat(2,1fr)}
+  .about-hero-split{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .treatments-list-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .testi-page-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  section{padding:70px 5%}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .treatments-grid{grid-template-columns:1fr}
+  .hero-trust{flex-wrap:wrap;gap:24px}
+  .trust-bar{grid-template-columns:repeat(2,1fr)}
+  .trust-item::after{display:none!important}
+  .blog-grid{grid-template-columns:1fr}
+  .ba-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .hero-float-card.c1{left:0}
+  .hero-float-card.c2{right:0}
+  .form-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center}
+  .booking-form-wrap{padding:32px 24px}
+  .doctor-badge{right:0}
+  .testi-page-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr}
+  .about-values-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr}
+  .treatment-info-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Animations */
+.reveal{opacity:0;transform:translateY(30px)}
+.reveal-left{opacity:0;transform:translateX(-30px)}
+.reveal-right{opacity:0;transform:translateX(30px)}
+.stagger-child{opacity:0;transform:translateY(20px)}
+.page-transition{animation:fadeIn 0.5s ease forwards}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="mainNav">
+  <a class="nav-logo" onclick="navigate('home')">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5.5 5 9c0 4.5 7 13 7 13s7-8.5 7-13c0-3.5-3-7-7-7zm0 10a3 3 0 100-6 3 3 0 000 6z"/></svg>
+    </div>
+    <span class="nav-brand">Derma<span>Veda</span></span>
+  </a>
+  <div class="nav-links">
+    <a onclick="navigate('home')" data-page="home">Home</a>
+    <a onclick="navigate('about-clinic')" data-page="about-clinic">About</a>
+    <a onclick="navigate('skin-treatments')" data-page="skin-treatments">Skin</a>
+    <a onclick="navigate('hair-treatments')" data-page="hair-treatments">Hair</a>
+    <a onclick="navigate('gallery')" data-page="gallery">Gallery</a>
+    <a onclick="navigate('testimonials')" data-page="testimonials">Reviews</a>
+    <a onclick="navigate('blog')" data-page="blog">Blog</a>
+    <a onclick="navigate('faq')" data-page="faq">FAQ</a>
+    <a onclick="navigate('contact')" data-page="contact">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="navigate('appointment')">Book Consultation</button>
+  <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a onclick="navigate('home');toggleMobile()">Home</a>
+  <a onclick="navigate('about-clinic');toggleMobile()">About Clinic</a>
+  <a onclick="navigate('about-doctor');toggleMobile()">About Doctor</a>
+  <a onclick="navigate('skin-treatments');toggleMobile()">Skin Treatments</a>
+  <a onclick="navigate('hair-treatments');toggleMobile()">Hair Treatments</a>
+  <a onclick="navigate('gallery');toggleMobile()">Before & After</a>
+  <a onclick="navigate('testimonials');toggleMobile()">Testimonials</a>
+  <a onclick="navigate('blog');toggleMobile()">Blog</a>
+  <a onclick="navigate('faq');toggleMobile()">FAQ</a>
+  <a onclick="navigate('appointment');toggleMobile()">Book Appointment</a>
+  <a onclick="navigate('contact');toggleMobile()">Contact</a>
+</div>
+
+<!-- ===== PAGE: HOME ===== -->
+<div class="page active" id="page-home">
+  <!-- HERO -->
+  <section class="hero" style="padding-top:120px">
+    <div class="hero-content">
+      <div class="hero-badge">Pune's Premier Skin & Hair Clinic</div>
+      <h1 class="hero-title">Reveal Your<br><em>Most Radiant</em><br>Self</h1>
+      <p class="hero-subtitle">Expert dermatology and trichology treatments, personalized for your unique skin and hair needs. Science-backed results with the warmth of genuine care.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="navigate('appointment')">Book Appointment</button>
+        <button class="btn-outline" onclick="navigate('skin-treatments')">Explore Treatments</button>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-stat"><div class="hero-stat-num"><span class="h-count" data-t="12">0</span>+</div><div class="hero-stat-label">Years of expertise</div></div>
+        <div class="hero-stat"><div class="hero-stat-num"><span class="h-count" data-t="8500">0</span>+</div><div class="hero-stat-label">Patients treated</div></div>
+        <div class="hero-stat"><div class="hero-stat-num"><span class="h-count" data-t="98">0</span>%</div><div class="hero-stat-label">Satisfaction rate</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&q=80&auto=format&fit=crop" alt="Premium clinic consultation" loading="eager">
+      </div>
+      <div class="hero-float-card c1">
+        <div class="float-card-label">Latest Review</div>
+        <div class="float-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div style="font-size:14px;line-height:1.4;color:var(--charcoal);font-style:italic">"Life-changing results!"</div>
+        <div class="float-card-sub">— Priya M., PRP Therapy</div>
+      </div>
+      <div class="hero-float-card c2">
+        <div class="float-card-label">Next Available</div>
+        <div class="float-card-val">Today</div>
+        <div class="float-card-sub">2:30 PM & 4:00 PM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item"><div class="trust-num"><span class="counter" data-target="12">0</span>+</div><div class="trust-label">Years Excellence</div></div>
+    <div class="trust-item"><div class="trust-num"><span class="counter" data-target="8500">0</span>+</div><div class="trust-label">Happy Patients</div></div>
+    <div class="trust-item"><div class="trust-num"><span class="counter" data-target="25">0</span>+</div><div class="trust-label">Treatments Offered</div></div>
+    <div class="trust-item"><div class="trust-num"><span class="counter" data-target="98">0</span>%</div><div class="trust-label">Satisfaction Rate</div></div>
+  </div>
+
+  <!-- TREATMENTS -->
+  <section style="background:var(--cream)">
+    <div class="section-header">
+      <span class="section-tag">Our Specialities</span>
+      <h2 class="section-title">Advanced Treatments,<br><em>Visible Transformations</em></h2>
+      <p class="section-sub">From medical dermatology to aesthetic enhancements — every treatment tailored to you.</p>
+    </div>
+    <div class="treatments-grid">
+      <div class="treatment-card stagger-child" onclick="navigate('treatment-acne')">
+        <div class="treatment-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+        <div class="treatment-name">Acne & Scar Treatment</div>
+        <p class="treatment-desc">Advanced protocols combining chemical peels, lasers, and targeted therapies to clear acne and fade scars.</p>
+        <div class="treatment-link">Explore Treatment <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      </div>
+      <div class="treatment-card stagger-child" onclick="navigate('treatment-prp')">
+        <div class="treatment-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z" stroke-width="1.5"/></svg></div>
+        <div class="treatment-name">PRP Hair Therapy</div>
+        <p class="treatment-desc">Platelet-Rich Plasma therapy to stimulate natural hair growth, reduce hair fall, and improve scalp health.</p>
+        <div class="treatment-link">Explore Treatment <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      </div>
+      <div class="treatment-card featured stagger-child" onclick="navigate('treatment-transplant')">
+        <div class="treatment-icon"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-10" stroke="white" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5" fill="none"/></svg></div>
+        <div class="treatment-name">Hair Transplant</div>
+        <p class="treatment-desc">State-of-the-art FUE & FUT techniques delivering natural-looking, permanent results with minimal downtime.</p>
+        <div class="treatment-link">Explore Treatment <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      </div>
+      <div class="treatment-card stagger-child" onclick="navigate('treatment-laser')">
+        <div class="treatment-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 3v1M12 20v1M4.22 4.22l.71.71M18.36 18.36l.71.71M3 12h1M20 12h1M4.22 19.78l.71-.71M18.36 5.64l.71-.71"/></svg></div>
+        <div class="treatment-name">Laser Skin Resurfacing</div>
+        <p class="treatment-desc">Fractional CO₂ and Q-Switch lasers to treat pigmentation, fine lines, and textural irregularities.</p>
+        <div class="treatment-link">Explore Treatment <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      </div>
+      <div class="treatment-card stagger-child" onclick="navigate('treatment-antiaging')">
+        <div class="treatment-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <div class="treatment-name">Anti-Aging Treatments</div>
+        <p class="treatment-desc">Botox, fillers, thread lifts, and RF microneedling to restore youthful radiance gracefully.</p>
+        <div class="treatment-link">Explore Treatment <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      </div>
+      <div class="treatment-card stagger-child" onclick="navigate('treatment-glow')">
+        <div class="treatment-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+        <div class="treatment-name">Skin Glow & Hydration</div>
+        <p class="treatment-desc">Hydrafacial, mesotherapy, and vitamin infusions for deep hydration and a luminous complexion.</p>
+        <div class="treatment-link">Explore Treatment <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;display:flex;gap:16px;justify-content:center">
+      <button class="btn-primary" onclick="navigate('skin-treatments')">All Skin Treatments</button>
+      <button class="btn-outline" onclick="navigate('hair-treatments')">All Hair Treatments</button>
+    </div>
+  </section>
+
+  <!-- BEFORE AFTER PREVIEW -->
+  <section>
+    <div class="section-header">
+      <span class="section-tag">Real Results</span>
+      <h2 class="section-title">Before & After<br><em>Transformations</em></h2>
+      <p class="section-sub">Every patient journey is unique. These real results speak to the quality of our treatments.</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-card" onclick="navigate('gallery')">
+        <img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80&auto=format&fit=crop" alt="Skin result">
+        <div class="ba-pill">Acne Treatment</div>
+        <div class="ba-overlay"><div class="ba-tag">6 Week Result</div><div class="ba-title">Clear Skin Protocol</div></div>
+      </div>
+      <div class="ba-card" onclick="navigate('gallery')">
+        <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=600&q=80&auto=format&fit=crop" alt="Hair result">
+        <div class="ba-pill">PRP Hair Therapy</div>
+        <div class="ba-overlay"><div class="ba-tag">3 Month Result</div><div class="ba-title">Hair Regrowth Journey</div></div>
+      </div>
+      <div class="ba-card" onclick="navigate('gallery')">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&auto=format&fit=crop" alt="Glow result">
+        <div class="ba-pill">Skin Glow</div>
+        <div class="ba-overlay"><div class="ba-tag">4 Session Result</div><div class="ba-title">Radiance Restored</div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px"><button class="btn-outline" onclick="navigate('gallery')">View Full Gallery →</button></div>
+  </section>
+
+  <!-- ABOUT DOCTOR PREVIEW -->
+  <section style="background:var(--cream)">
+    <div class="about-section">
+      <div class="doctor-img-wrap">
+        <div class="doctor-img">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=700&q=80&auto=format&fit=crop" alt="Dr. Meera Sharma">
+        </div>
+        <div class="doctor-badge">
+          <div class="doctor-badge-title">Lead Dermatologist</div>
+          <div class="doctor-badge-name">Dr. Meera Sharma</div>
+          <div class="doctor-badge-creds">MD, DNB · Harvard Fellowship</div>
+        </div>
+      </div>
+      <div>
+        <span class="section-tag">Meet the Doctor</span>
+        <h2 class="section-title">Trusted Expertise,<br><em>Compassionate Care</em></h2>
+        <p class="section-sub">With over 12 years in clinical dermatology and aesthetic medicine, Dr. Meera Sharma combines cutting-edge science with an artistic eye for natural-looking results.</p>
+        <div class="credentials">
+          <div class="cred-item"><div class="cred-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><div class="cred-label">MD Dermatology — AIIMS Delhi</div><div class="cred-sub">Gold Medalist, top-ranked graduating class</div></div></div>
+          <div class="cred-item"><div class="cred-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div><div class="cred-label">Fellowship — Harvard Medical School</div><div class="cred-sub">Cosmetic Dermatology, Boston USA</div></div></div>
+          <div class="cred-item"><div class="cred-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="cred-label">International Speaker & Trainer</div><div class="cred-sub">50+ dermatology conferences across Asia & Europe</div></div></div>
+        </div>
+        <div style="margin-top:32px;display:flex;gap:16px">
+          <button class="btn-primary" onclick="navigate('about-doctor')">Full Profile</button>
+          <button class="btn-outline" onclick="navigate('appointment')">Book Consultation</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section" style="padding:100px 0">
+    <div class="testi-header">
+      <span class="section-tag" style="color:var(--gold)">Patient Stories</span>
+      <h2 class="section-title" style="color:white">What Our Patients<br><em>Say About Us</em></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.5);margin:0 auto">Real experiences from real patients — their words inspire everything we do.</p>
+    </div>
+    <div class="testimonials-track-wrap">
+      <div class="testimonials-track" id="testiTrack">
+        <div class="testi-card"><div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="testi-quote">"After years struggling with acne, my skin is completely transformed. Dr. Sharma genuinely listened."</div><div class="testi-author"><div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&fit=crop&fit=faces" alt="Priya"></div><div><div class="testi-name">Priya Mehta</div><div class="testi-treat">Acne Treatment</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="testi-quote">"PRP hair therapy gave me my confidence back. Visible improvement from the very first session!"</div><div class="testi-author"><div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&fit=crop&fit=faces" alt="Rohan"></div><div><div class="testi-name">Rohan Kulkarni</div><div class="testi-treat">PRP Hair Therapy</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="testi-quote">"Dr. Sharma is an artist. My laser results look so natural. This clinic redefines skincare."</div><div class="testi-author"><div class="testi-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80&fit=crop&fit=faces" alt="Ananya"></div><div><div class="testi-name">Ananya Singh</div><div class="testi-treat">Laser Resurfacing</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="testi-quote">"I came expecting a sales pitch. Instead I got honest advice and excellent hair transplant results."</div><div class="testi-author"><div class="testi-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80&fit=crop&fit=faces" alt="Vikram"></div><div><div class="testi-name">Vikram Joshi</div><div class="testi-treat">Hair Transplant</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="testi-quote">"The glow treatment refreshed my skin completely. Everyone is asking what my secret is at 45!"</div><div class="testi-author"><div class="testi-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80&fit=crop&fit=faces" alt="Kavitha"></div><div><div class="testi-name">Kavitha Rao</div><div class="testi-treat">Skin Glow Therapy</div></div></div></div>
+        <!-- Duplicates for infinite -->
+        <div class="testi-card"><div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="testi-quote">"After years struggling with acne, my skin is completely transformed. Dr. Sharma genuinely listened."</div><div class="testi-author"><div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&fit=crop&fit=faces" alt="Priya"></div><div><div class="testi-name">Priya Mehta</div><div class="testi-treat">Acne Treatment</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="testi-quote">"PRP hair therapy gave me my confidence back. Visible improvement from the very first session!"</div><div class="testi-author"><div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&fit=crop&fit=faces" alt="Rohan"></div><div><div class="testi-name">Rohan Kulkarni</div><div class="testi-treat">PRP Hair Therapy</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><div class="testi-quote">"Dr. Sharma is an artist. My laser results look so natural. This clinic redefines skincare."</div><div class="testi-author"><div class="testi-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80&fit=crop&fit=faces" alt="Ananya"></div><div><div class="testi-name">Ananya Singh</div><div class="testi-treat">Laser Resurfacing</div></div></div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px"><button class="btn-gold" onclick="navigate('testimonials')">Read All Reviews →</button></div>
+  </section>
+
+  <!-- BLOG PREVIEW -->
+  <section>
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:48px">
+      <div>
+        <span class="section-tag">Knowledge Hub</span>
+        <h2 class="section-title" style="margin-bottom:0">Expert Insights &<br><em>Skin Care Tips</em></h2>
+      </div>
+      <button class="btn-outline" onclick="navigate('blog')">View All Articles →</button>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card stagger-child" onclick="navigate('blog-post-1')">
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80&auto=format&fit=crop" alt="Skincare" loading="lazy"></div>
+        <div class="blog-body"><div class="blog-cat">Skincare</div><div class="blog-title">The Science Behind Vitamin C Serums</div><p class="blog-excerpt">Understanding pH stability, concentration, and delivery systems that determine whether your vitamin C serum actually works.</p><div class="blog-meta"><span class="blog-date">May 2, 2025</span><span class="blog-read">5 min read →</span></div></div>
+      </div>
+      <div class="blog-card stagger-child" onclick="navigate('blog-post-2')">
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&auto=format&fit=crop" alt="Hair care" loading="lazy"></div>
+        <div class="blog-body"><div class="blog-cat">Hair Care</div><div class="blog-title">PRP vs. Minoxidil: Choosing the Right Hair Loss Treatment</div><p class="blog-excerpt">A clinical comparison of the two most popular hair loss treatments — who benefits from each.</p><div class="blog-meta"><span class="blog-date">April 18, 2025</span><span class="blog-read">7 min read →</span></div></div>
+      </div>
+      <div class="blog-card stagger-child" onclick="navigate('blog-post-3')">
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80&auto=format&fit=crop" alt="Anti aging" loading="lazy"></div>
+        <div class="blog-body"><div class="blog-cat">Anti-Aging</div><div class="blog-title">Botox at 35: Is Preventive Treatment Right for You?</div><p class="blog-excerpt">The evidence for early intervention in anti-aging, when it makes sense, and what realistic outcomes to expect.</p><div class="blog-meta"><span class="blog-date">April 5, 2025</span><span class="blog-read">6 min read →</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="booking-section">
+    <div class="booking-wrap">
+      <div class="booking-info">
+        <span class="section-tag">Get Started</span>
+        <h2 class="section-title">Book Your<br><em>Consultation</em></h2>
+        <p class="section-sub">Take the first step toward radiant skin and healthy hair. Our team responds within 2 hours.</p>
+        <div class="booking-features">
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free initial consultation assessment</div>
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Personalized treatment plan</div>
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>EMI options available</div>
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% confidential consultations</div>
+        </div>
+      </div>
+      <div><button class="btn-gold" style="font-size:16px;padding:18px 48px" onclick="navigate('appointment')">Book Full Appointment Form →</button>
+      <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-top:16px">Or call us directly at <a href="tel:+919876543210" style="color:var(--gold-light)">+91 98765 43210</a></p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: ABOUT CLINIC ===== -->
+<div class="page" id="page-about-clinic">
+  <div class="page-hero">
+    <span class="page-hero-tag">Who We Are</span>
+    <h1 class="page-hero-title">About <em>DermaVeda</em></h1>
+    <p class="page-hero-sub">Pune's most trusted destination for advanced skin and hair treatments since 2012.</p>
+    <div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>About Clinic</span></div>
+  </div>
+  <section>
+    <div class="about-hero-split">
+      <div>
+        <span class="section-tag">Our Story</span>
+        <h2 class="section-title">Founded on <em>Excellence</em></h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:20px">DermaVeda was founded in 2012 by Dr. Meera Sharma with a singular vision: to bring world-class dermatological care to Pune, with the warmth and personal attention that patients truly deserve.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:20px">Over the past 12 years, we have grown from a 3-room clinic into a fully equipped, NABH-accredited dermatology center — while never losing sight of what matters most: every patient is an individual, not a condition.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9">Today, DermaVeda is home to 6 specialist doctors, 4 trained skin therapists, and the latest technology in skin and hair medicine — all under one roof in the heart of Koregaon Park, Pune.</p>
+      </div>
+      <div style="border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:4/3">
+        <img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=800&q=80&auto=format&fit=crop" alt="Clinic interior" style="width:100%;height:100%;object-fit:cover">
+      </div>
+    </div>
+    <div class="about-values-grid">
+      <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="value-title">Clinical Excellence</div><p class="value-desc">Every treatment protocol is grounded in published clinical evidence and continuously updated with the latest research.</p></div>
+      <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><div class="value-title">Patient-First Care</div><p class="value-desc">We listen before we prescribe. Your concerns, comfort, and goals shape every decision we make together.</p></div>
+      <div class="value-card"><div class="value-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="value-title">Lasting Results</div><p class="value-desc">We focus on treatments that deliver genuine, durable outcomes — not just quick fixes or temporary improvements.</p></div>
+    </div>
+  </section>
+  <section style="background:var(--cream)">
+    <div class="section-header centered">
+      <span class="section-tag">Our Team</span>
+      <h2 class="section-title">Meet Our <em>Specialists</em></h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-img"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80&auto=format&fit=crop" alt="Dr Meera Sharma"></div><div class="team-name">Dr. Meera Sharma</div><div class="team-role">Lead Dermatologist & Founder</div><div class="team-bio">MD, DNB · Harvard Fellowship · 12+ years clinical experience</div></div>
+      <div class="team-card"><div class="team-img"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=600&q=80&auto=format&fit=crop" alt="Dr Arjun Patel"></div><div class="team-name">Dr. Arjun Patel</div><div class="team-role">Senior Trichologist</div><div class="team-bio">MS, MBBS · Specialist in hair transplant and hair loss medicine · 9 years experience</div></div>
+      <div class="team-card"><div class="team-img"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80&auto=format&fit=crop" alt="Dr Priya Iyer"></div><div class="team-name">Dr. Priya Iyer</div><div class="team-role">Aesthetic Dermatologist</div><div class="team-bio">MD Dermatology · Specializes in Botox, fillers, and non-surgical rejuvenation · 7 years</div></div>
+    </div>
+  </section>
+  <section style="text-align:center">
+    <span class="section-tag">Ready to begin?</span>
+    <h2 class="section-title">Start Your Skin <em>Journey Today</em></h2>
+    <div style="margin-top:32px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-primary" onclick="navigate('appointment')">Book Consultation</button>
+      <button class="btn-outline" onclick="navigate('contact')">Contact Us</button>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: ABOUT DOCTOR ===== -->
+<div class="page" id="page-about-doctor">
+  <div class="page-hero">
+    <span class="page-hero-tag">Our Lead Physician</span>
+    <h1 class="page-hero-title">Dr. Meera <em>Sharma</em></h1>
+    <p class="page-hero-sub">MD, DNB, Fellowship Harvard · Lead Dermatologist & Founder</p>
+    <div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <a onclick="navigate('about-clinic')">About</a> › <span>Dr. Sharma</span></div>
+  </div>
+  <section>
+    <div class="about-section">
+      <div class="doctor-img-wrap"><div class="doctor-img"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=700&q=80&auto=format&fit=crop" alt="Dr. Meera Sharma"></div><div class="doctor-badge"><div class="doctor-badge-title">Lead Dermatologist</div><div class="doctor-badge-name">Dr. Meera Sharma</div><div class="doctor-badge-creds">MD, DNB · Harvard Fellowship</div></div></div>
+      <div>
+        <span class="section-tag">Biography</span>
+        <h2 class="section-title">12 Years of <em>Excellence</em></h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:16px">Dr. Meera Sharma graduated at the top of her class from AIIMS Delhi, earning a Gold Medal in her MD Dermatology program. She completed her post-doctoral Fellowship in Cosmetic Dermatology at Harvard Medical School, Boston — one of only three Indian doctors selected for that year's cohort.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:16px">Returning to India, Dr. Sharma founded DermaVeda in 2012 with a mission to make international-standard dermatological care accessible in Pune. Her expertise spans medical dermatology, aesthetic treatments, and advanced trichology.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9">She has presented research at over 50 dermatology conferences across Asia, Europe, and North America, and is a sought-after trainer for other dermatologists in laser and injectable techniques.</p>
+        <div class="credentials" style="margin-top:28px">
+          <div class="cred-item"><div class="cred-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v2M15 3v2"/></svg></div><div><div class="cred-label">MBBS — Government Medical College, Pune</div><div class="cred-sub">2006 · Distinction in all subjects</div></div></div>
+          <div class="cred-item"><div class="cred-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div><div class="cred-label">MD Dermatology — AIIMS Delhi</div><div class="cred-sub">2010 · Gold Medalist</div></div></div>
+          <div class="cred-item"><div class="cred-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div><div class="cred-label">Post-Doctoral Fellowship — Harvard Medical School</div><div class="cred-sub">2012 · Cosmetic Dermatology & Aesthetic Medicine, Boston USA</div></div></div>
+          <div class="cred-item"><div class="cred-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="cred-label">Member — Indian Association of Dermatologists</div><div class="cred-sub">IADVL, ISDS, AAD (American Academy of Dermatology)</div></div></div>
+        </div>
+        <div style="margin-top:32px"><button class="btn-primary" onclick="navigate('appointment')">Book with Dr. Sharma</button></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: SKIN TREATMENTS ===== -->
+<div class="page" id="page-skin-treatments">
+  <div class="page-hero">
+    <span class="page-hero-tag">Medical & Aesthetic</span>
+    <h1 class="page-hero-title">Skin <em>Treatments</em></h1>
+    <p class="page-hero-sub">Advanced, evidence-based skin treatments for all skin types and concerns.</p>
+    <div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>Skin Treatments</span></div>
+  </div>
+  <section>
+    <div class="treatments-list-grid">
+      <div class="treatment-list-card" onclick="navigate('treatment-acne')"><div class="treatment-list-img"><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&q=80&auto=format&fit=crop" alt="Acne"></div><div class="treatment-list-body"><div class="treatment-list-name">Acne & Scar Treatment</div><p class="treatment-list-desc">Advanced multi-modal protocols to clear active acne and fade scars for smooth, even skin.</p><div class="treatment-list-tags"><span class="treatment-list-tag">Chemical Peels</span><span class="treatment-list-tag">Microneedling</span><span class="treatment-list-tag">Laser</span></div><div class="treatment-link" style="margin-top:16px">View Details →</div></div></div>
+      <div class="treatment-list-card" onclick="navigate('treatment-laser')"><div class="treatment-list-img"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80&auto=format&fit=crop" alt="Laser"></div><div class="treatment-list-body"><div class="treatment-list-name">Laser Skin Resurfacing</div><p class="treatment-list-desc">Fractional CO₂ and Q-Switch lasers to address pigmentation, fine lines, and textural concerns.</p><div class="treatment-list-tags"><span class="treatment-list-tag">CO₂ Laser</span><span class="treatment-list-tag">Q-Switch</span><span class="treatment-list-tag">Pigmentation</span></div><div class="treatment-link" style="margin-top:16px">View Details →</div></div></div>
+      <div class="treatment-list-card" onclick="navigate('treatment-antiaging')"><div class="treatment-list-img"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&q=80&auto=format&fit=crop" alt="Anti-aging"></div><div class="treatment-list-body"><div class="treatment-list-name">Anti-Aging Treatments</div><p class="treatment-list-desc">Botox, fillers, thread lifts, and RF microneedling for youthful, radiant results.</p><div class="treatment-list-tags"><span class="treatment-list-tag">Botox</span><span class="treatment-list-tag">Fillers</span><span class="treatment-list-tag">Thread Lift</span></div><div class="treatment-link" style="margin-top:16px">View Details →</div></div></div>
+      <div class="treatment-list-card" onclick="navigate('treatment-glow')"><div class="treatment-list-img"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&q=80&auto=format&fit=crop" alt="Glow"></div><div class="treatment-list-body"><div class="treatment-list-name">Skin Glow & Hydration</div><p class="treatment-list-desc">Hydrafacial, mesotherapy, and IV infusions for deep nourishment and a natural lit-from-within glow.</p><div class="treatment-list-tags"><span class="treatment-list-tag">Hydrafacial</span><span class="treatment-list-tag">Mesotherapy</span><span class="treatment-list-tag">Glow</span></div><div class="treatment-link" style="margin-top:16px">View Details →</div></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: HAIR TREATMENTS ===== -->
+<div class="page" id="page-hair-treatments">
+  <div class="page-hero">
+    <span class="page-hero-tag">Trichology & Restoration</span>
+    <h1 class="page-hero-title">Hair <em>Treatments</em></h1>
+    <p class="page-hero-sub">From hair fall control to full transplant — permanent solutions for all hair concerns.</p>
+    <div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>Hair Treatments</span></div>
+  </div>
+  <section>
+    <div class="treatments-list-grid">
+      <div class="treatment-list-card" onclick="navigate('treatment-prp')"><div class="treatment-list-img"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=400&q=80&auto=format&fit=crop" alt="PRP"></div><div class="treatment-list-body"><div class="treatment-list-name">PRP Hair Therapy</div><p class="treatment-list-desc">Platelet-Rich Plasma injections to stimulate hair follicles, reduce fall, and boost growth naturally.</p><div class="treatment-list-tags"><span class="treatment-list-tag">Hair Fall</span><span class="treatment-list-tag">Scalp Health</span><span class="treatment-list-tag">Growth</span></div><div class="treatment-link" style="margin-top:16px">View Details →</div></div></div>
+      <div class="treatment-list-card" onclick="navigate('treatment-transplant')"><div class="treatment-list-img"><img src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?w=400&q=80&auto=format&fit=crop" alt="Transplant"></div><div class="treatment-list-body"><div class="treatment-list-name">Hair Transplant (FUE/FUT)</div><p class="treatment-list-desc">Permanent hair restoration using follicular unit extraction for natural, undetectable results.</p><div class="treatment-list-tags"><span class="treatment-list-tag">FUE</span><span class="treatment-list-tag">FUT</span><span class="treatment-list-tag">Permanent</span></div><div class="treatment-link" style="margin-top:16px">View Details →</div></div></div>
+      <div class="treatment-list-card" onclick="navigate('hair-treatments')"><div class="treatment-list-img"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&q=80&auto=format&fit=crop" alt="GFC"></div><div class="treatment-list-body"><div class="treatment-list-name">GFC Hair Treatment</div><p class="treatment-list-desc">Growth Factor Concentrate therapy — the next evolution beyond PRP for superior hair regeneration.</p><div class="treatment-list-tags"><span class="treatment-list-tag">GFC</span><span class="treatment-list-tag">Regeneration</span><span class="treatment-list-tag">Advanced</span></div><div class="treatment-link" style="margin-top:16px">View Details →</div></div></div>
+      <div class="treatment-list-card" onclick="navigate('hair-treatments')"><div class="treatment-list-img"><img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=400&q=80&auto=format&fit=crop" alt="Scalp"></div><div class="treatment-list-body"><div class="treatment-list-name">Scalp Micropigmentation</div><p class="treatment-list-desc">A non-surgical hair tattoo technique creating the illusion of a close-cropped, full head of hair.</p><div class="treatment-list-tags"><span class="treatment-list-tag">SMP</span><span class="treatment-list-tag">Non-surgical</span><span class="treatment-list-tag">Density</span></div><div class="treatment-link" style="margin-top:16px">View Details →</div></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TREATMENT DETAIL: ACNE ===== -->
+<div class="page" id="page-treatment-acne">
+  <div class="treatment-detail-hero">
+    <div>
+      <div class="breadcrumb" style="justify-content:flex-start;margin-bottom:20px"><a onclick="navigate('home')" style="color:rgba(255,255,255,0.5)">Home</a> <span style="margin:0 8px;color:rgba(255,255,255,0.3)">›</span> <a onclick="navigate('skin-treatments')" style="color:var(--sage)">Skin</a> <span style="margin:0 8px;color:rgba(255,255,255,0.3)">›</span> <span style="color:rgba(255,255,255,0.7)">Acne Treatment</span></div>
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)">Skin Treatment</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:300;color:white;line-height:1.1;margin:12px 0 16px">Acne & Scar <em style="color:var(--sage)">Treatment</em></h1>
+      <p style="font-size:16px;color:rgba(255,255,255,0.65);line-height:1.8;max-width:520px;margin-bottom:28px">A personalized, multi-modal approach combining medical-grade peels, targeted lasers, and prescription protocols to deliver clear, even skin.</p>
+      <button class="btn-gold" onclick="navigate('appointment')">Book Consultation</button>
+      <div class="treatment-info-grid">
+        <div class="info-box"><div class="info-box-label">Duration</div><div class="info-box-val">45–90 min</div></div>
+        <div class="info-box"><div class="info-box-label">Sessions</div><div class="info-box-val">4–8</div></div>
+        <div class="info-box"><div class="info-box-label">Downtime</div><div class="info-box-val">1–3 days</div></div>
+        <div class="info-box"><div class="info-box-label">Results visible</div><div class="info-box-val">4–6 weeks</div></div>
+      </div>
+    </div>
+    <div><div class="treatment-detail-img"><img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=800&q=80&auto=format&fit=crop" alt="Acne Treatment"></div></div>
+  </div>
+  <section>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:60px;align-items:start">
+      <div>
+        <span class="section-tag">How It Works</span>
+        <h2 class="section-title">Our Acne <em>Protocol</em></h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:24px">At DermaVeda, acne treatment begins with understanding your skin at a cellular level. We don't believe in one-size-fits-all solutions — your hormonal profile, skin type, and lifestyle all influence which approach will work best for you.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:40px">Our acne specialists combine in-clinic procedures with a tailored home skincare regime, ensuring that results are both rapid and long-lasting.</p>
+        <div class="treatment-steps">
+          <div class="step-card"><div class="step-num">01</div><div class="step-title">Comprehensive Skin Analysis</div><div class="step-desc">Detailed assessment of your acne type, severity, triggers, and skin health using advanced diagnostic tools.</div></div>
+          <div class="step-card"><div class="step-num">02</div><div class="step-title">Medical Treatment Plan</div><div class="step-desc">Prescription topicals, oral medications if needed, and in-clinic procedure schedule designed for you.</div></div>
+          <div class="step-card"><div class="step-num">03</div><div class="step-title">In-Clinic Procedures</div><div class="step-desc">Chemical peels, comedone extraction, laser acne therapy, and microneedling based on your specific needs.</div></div>
+          <div class="step-card"><div class="step-num">04</div><div class="step-title">Scar Revision</div><div class="step-desc">Once active acne is controlled, targeted scar treatments including CO₂ laser and subcision for lasting smoothness.</div></div>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal);margin:48px 0 20px">What to Expect</h3>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:16px">Most patients begin seeing significant improvement within 4–6 weeks of starting treatment. Active breakouts reduce first, followed by gradual fading of existing marks and scars over the following months.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9">There may be minor redness or peeling after chemical peel sessions — this is normal and resolves within 1–3 days. We provide complete aftercare instructions and are available for questions throughout your treatment journey.</p>
+      </div>
+      <div class="side-sticky">
+        <div class="booking-side-card">
+          <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Starting From</div>
+          <div class="price-tag">₹2,500</div>
+          <div class="price-note">per session · packages available</div>
+          <button class="btn-primary" style="width:100%;margin-top:24px" onclick="navigate('appointment')">Book Consultation</button>
+          <div class="benefit-list">
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free skin analysis at first visit</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Customized home care kit</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>WhatsApp follow-up support</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>0% EMI on packages</div>
+          </div>
+        </div>
+        <div style="background:rgba(139,168,136,0.1);border-radius:var(--radius-md);padding:24px;margin-top:24px">
+          <div style="font-size:13px;font-weight:600;color:var(--deep-sage);margin-bottom:8px">Other Skin Treatments</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a onclick="navigate('treatment-laser')" style="font-size:14px;color:var(--slate);cursor:pointer;transition:color 0.2s" onmouseover="this.style.color='var(--deep-sage)'" onmouseout="this.style.color='var(--slate)'">→ Laser Skin Resurfacing</a>
+            <a onclick="navigate('treatment-antiaging')" style="font-size:14px;color:var(--slate);cursor:pointer;transition:color 0.2s" onmouseover="this.style.color='var(--deep-sage)'" onmouseout="this.style.color='var(--slate)'">→ Anti-Aging Treatments</a>
+            <a onclick="navigate('treatment-glow')" style="font-size:14px;color:var(--slate);cursor:pointer;transition:color 0.2s" onmouseover="this.style.color='var(--deep-sage)'" onmouseout="this.style.color='var(--slate)'">→ Skin Glow & Hydration</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TREATMENT DETAIL: PRP ===== -->
+<div class="page" id="page-treatment-prp">
+  <div class="treatment-detail-hero">
+    <div>
+      <div class="breadcrumb" style="justify-content:flex-start;margin-bottom:20px"><a onclick="navigate('home')" style="color:rgba(255,255,255,0.5)">Home</a><span style="margin:0 8px;color:rgba(255,255,255,0.3)">›</span><a onclick="navigate('hair-treatments')" style="color:var(--sage)">Hair</a><span style="margin:0 8px;color:rgba(255,255,255,0.3)">›</span><span style="color:rgba(255,255,255,0.7)">PRP Therapy</span></div>
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)">Hair Treatment</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:300;color:white;line-height:1.1;margin:12px 0 16px">PRP Hair <em style="color:var(--sage)">Therapy</em></h1>
+      <p style="font-size:16px;color:rgba(255,255,255,0.65);line-height:1.8;max-width:520px;margin-bottom:28px">Harness the power of your own blood's growth factors to stimulate dormant follicles, reduce shedding, and restore density naturally.</p>
+      <button class="btn-gold" onclick="navigate('appointment')">Book Consultation</button>
+      <div class="treatment-info-grid">
+        <div class="info-box"><div class="info-box-label">Duration</div><div class="info-box-val">60 min</div></div>
+        <div class="info-box"><div class="info-box-label">Sessions</div><div class="info-box-val">3–6</div></div>
+        <div class="info-box"><div class="info-box-label">Downtime</div><div class="info-box-val">None</div></div>
+        <div class="info-box"><div class="info-box-label">Results</div><div class="info-box-val">3 months</div></div>
+      </div>
+    </div>
+    <div><div class="treatment-detail-img"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=800&q=80&auto=format&fit=crop" alt="PRP Treatment"></div></div>
+  </div>
+  <section>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:60px;align-items:start">
+      <div>
+        <span class="section-tag">What is PRP?</span>
+        <h2 class="section-title">Science of <em>Hair Regeneration</em></h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:24px">PRP (Platelet-Rich Plasma) is derived from your own blood. After drawing a small sample, we spin it in a centrifuge to concentrate the platelets — tiny cells packed with growth factors that trigger tissue repair and regeneration.</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:40px">When injected into the scalp at the level of the hair follicles, these growth factors wake dormant follicles, strengthen existing hair, improve scalp blood supply, and significantly reduce shedding — all without any synthetic chemicals.</p>
+        <div class="treatment-steps">
+          <div class="step-card"><div class="step-num">01</div><div class="step-title">Blood Draw</div><div class="step-desc">A small sample (15–20 ml) of your blood is drawn from your arm — similar to a routine blood test.</div></div>
+          <div class="step-card"><div class="step-num">02</div><div class="step-title">Centrifugation</div><div class="step-desc">Your blood is spun in our specialized centrifuge to separate and concentrate the platelets.</div></div>
+          <div class="step-card"><div class="step-num">03</div><div class="step-title">Scalp Preparation</div><div class="step-desc">The scalp is cleansed and a topical numbing cream is applied for a comfortable experience.</div></div>
+          <div class="step-card"><div class="step-num">04</div><div class="step-title">PRP Injection</div><div class="step-desc">The concentrated PRP is micro-injected at 1 cm intervals across areas of hair thinning or loss.</div></div>
+        </div>
+      </div>
+      <div class="side-sticky">
+        <div class="booking-side-card">
+          <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Starting From</div>
+          <div class="price-tag">₹4,500</div>
+          <div class="price-note">per session · 3-session packages available</div>
+          <button class="btn-primary" style="width:100%;margin-top:24px" onclick="navigate('appointment')">Book Consultation</button>
+          <div class="benefit-list">
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No downtime required</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% natural — your own blood</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Visible results in 3 months</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Safe for men and women</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TREATMENT DETAIL: TRANSPLANT ===== -->
+<div class="page" id="page-treatment-transplant">
+  <div class="treatment-detail-hero">
+    <div>
+      <div class="breadcrumb" style="justify-content:flex-start;margin-bottom:20px"><a onclick="navigate('home')" style="color:rgba(255,255,255,0.5)">Home</a><span style="margin:0 8px;color:rgba(255,255,255,0.3)">›</span><a onclick="navigate('hair-treatments')" style="color:var(--sage)">Hair</a><span style="margin:0 8px;color:rgba(255,255,255,0.3)">›</span><span style="color:rgba(255,255,255,0.7)">Hair Transplant</span></div>
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)">Featured Treatment</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:300;color:white;line-height:1.1;margin:12px 0 16px">Hair <em style="color:var(--sage)">Transplant</em></h1>
+      <p style="font-size:16px;color:rgba(255,255,255,0.65);line-height:1.8;max-width:520px;margin-bottom:28px">Permanent, natural-looking hair restoration using state-of-the-art FUE technology — no visible scars, no stitches, no compromise.</p>
+      <button class="btn-gold" onclick="navigate('appointment')">Free Transplant Consultation</button>
+      <div class="treatment-info-grid">
+        <div class="info-box"><div class="info-box-label">Duration</div><div class="info-box-val">6–8 hrs</div></div>
+        <div class="info-box"><div class="info-box-label">Sessions</div><div class="info-box-val">1 (usually)</div></div>
+        <div class="info-box"><div class="info-box-label">Recovery</div><div class="info-box-val">5–7 days</div></div>
+        <div class="info-box"><div class="info-box-label">Full Results</div><div class="info-box-val">12 months</div></div>
+      </div>
+    </div>
+    <div><div class="treatment-detail-img"><img src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?w=800&q=80&auto=format&fit=crop" alt="Hair Transplant"></div></div>
+  </div>
+  <section>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:60px;align-items:start">
+      <div>
+        <span class="section-tag">The Procedure</span>
+        <h2 class="section-title">FUE Hair <em>Transplant</em></h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:40px">Follicular Unit Extraction (FUE) is the gold standard in modern hair transplantation. Individual hair follicles are extracted from the donor area (typically the back and sides of the scalp) and transplanted to thinning or bald areas with artistic precision — matching your natural hair direction, angle, and density.</p>
+        <div class="treatment-steps">
+          <div class="step-card"><div class="step-num">01</div><div class="step-title">Design & Planning</div><div class="step-desc">Dr. Arjun Patel designs your new hairline, calculates graft requirements, and plans the extraction zone.</div></div>
+          <div class="step-card"><div class="step-num">02</div><div class="step-title">Donor Harvesting</div><div class="step-desc">Individual grafts are extracted one by one using a micro-punch tool under local anesthesia — no linear scar.</div></div>
+          <div class="step-card"><div class="step-num">03</div><div class="step-title">Graft Processing</div><div class="step-desc">Extracted follicles are sorted, counted, and preserved in a specialized solution to maximize survival rate.</div></div>
+          <div class="step-card"><div class="step-num">04</div><div class="step-title">Recipient Site Creation</div><div class="step-desc">Micro-channels are made in the recipient area following the natural hair growth pattern for undetectable results.</div></div>
+          <div class="step-card"><div class="step-num">05</div><div class="step-title">Graft Implantation</div><div class="step-desc">Each graft is carefully placed into the recipient sites with forceps, achieving natural density and coverage.</div></div>
+          <div class="step-card"><div class="step-num">06</div><div class="step-title">Recovery & Growth</div><div class="step-desc">Transplanted hairs shed at 2–6 weeks (normal), then regrow permanently from month 3 onwards.</div></div>
+        </div>
+      </div>
+      <div class="side-sticky">
+        <div class="booking-side-card">
+          <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Starting From</div>
+          <div class="price-tag">₹35,000</div>
+          <div class="price-note">based on graft count · EMI available</div>
+          <button class="btn-primary" style="width:100%;margin-top:24px" onclick="navigate('appointment')">Free Consultation</button>
+          <div class="benefit-list">
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Permanent, lifetime results</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No visible scars (FUE)</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>97%+ graft survival rate</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>12-month follow-up included</div>
+            <div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>0% EMI for 12 months</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TREATMENT: LASER ===== -->
+<div class="page" id="page-treatment-laser">
+  <div class="page-hero"><span class="page-hero-tag">Skin Treatment</span><h1 class="page-hero-title">Laser Skin <em>Resurfacing</em></h1><p class="page-hero-sub">Advanced laser technologies to resurface, brighten, and rejuvenate your skin.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <a onclick="navigate('skin-treatments')">Skin</a> › <span>Laser Resurfacing</span></div></div>
+  <section>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:60px"><div><span class="section-tag">Treatment Overview</span><h2 class="section-title">Laser <em>Technology</em></h2><p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:24px">Our laser suite features the latest CO₂ fractional laser, Q-Switch Nd:YAG, and 1064nm diode systems — each chosen for effectiveness across Indian skin tones. Whether you're targeting stubborn pigmentation, pores, acne scars, or fine lines, we have a laser protocol optimized for your concern.</p><div class="treatment-steps"><div class="step-card"><div class="step-num">01</div><div class="step-title">CO₂ Fractional Laser</div><div class="step-desc">For acne scars, skin texture, fine lines, and open pores. Controlled ablation with rapid collagen stimulation.</div></div><div class="step-card"><div class="step-num">02</div><div class="step-title">Q-Switch Laser</div><div class="step-desc">Targets pigmentation, melasma, sun spots, and tattoo removal with millisecond precision pulses.</div></div><div class="step-card"><div class="step-num">03</div><div class="step-title">Diode Laser</div><div class="step-desc">Safe, effective permanent hair reduction for all skin types with minimal discomfort and no downtime.</div></div><div class="step-card"><div class="step-num">04</div><div class="step-title">LLLT (Low Level)</div><div class="step-desc">Biostimulation therapy for hair growth, skin healing, and anti-inflammatory scalp treatment.</div></div></div></div><div class="side-sticky"><div class="booking-side-card"><div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Starting From</div><div class="price-tag">₹3,500</div><div class="price-note">per session</div><button class="btn-primary" style="width:100%;margin-top:24px" onclick="navigate('appointment')">Book Consultation</button><div class="benefit-list"><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Safe for Indian skin tones</div><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Multiple laser systems</div><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Certified laser technicians</div></div></div></div></div>
+  </section>
+</div>
+
+<!-- ===== TREATMENT: ANTI-AGING ===== -->
+<div class="page" id="page-treatment-antiaging">
+  <div class="page-hero"><span class="page-hero-tag">Aesthetic Medicine</span><h1 class="page-hero-title">Anti-Aging <em>Treatments</em></h1><p class="page-hero-sub">Natural-looking rejuvenation with Botox, fillers, thread lifts, and more.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <a onclick="navigate('skin-treatments')">Skin</a> › <span>Anti-Aging</span></div></div>
+  <section>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:60px"><div><span class="section-tag">Treatment Options</span><h2 class="section-title">Restore Your <em>Youthfulness</em></h2><p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:40px">Our anti-aging philosophy is natural enhancement — results that make you look well-rested and refreshed, not 'done'. Dr. Sharma's artistic approach ensures every treatment is tailored to your facial structure and aesthetic goals.</p><div class="treatment-steps"><div class="step-card"><div class="step-num">01</div><div class="step-title">Botulinum Toxin (Botox)</div><div class="step-desc">Smooth forehead lines, frown lines, crow's feet. Results in 3–5 days, lasting 4–6 months.</div></div><div class="step-card"><div class="step-num">02</div><div class="step-title">Dermal Fillers</div><div class="step-desc">Restore volume, define jawline, lift cheeks, and plump lips. Hyaluronic acid — fully reversible.</div></div><div class="step-card"><div class="step-num">03</div><div class="step-title">Thread Lift</div><div class="step-desc">Non-surgical face lift using dissolvable PDO threads. Immediate lift with collagen stimulation over 6 months.</div></div><div class="step-card"><div class="step-num">04</div><div class="step-title">RF Microneedling</div><div class="step-desc">Radio frequency + microneedling for skin tightening, pore reduction, and deep collagen remodeling.</div></div></div></div><div class="side-sticky"><div class="booking-side-card"><div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Starting From</div><div class="price-tag">₹5,000</div><div class="price-note">Botox per area</div><button class="btn-primary" style="width:100%;margin-top:24px" onclick="navigate('appointment')">Book Consultation</button><div class="benefit-list"><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dr. Sharma performs all injectables</div><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Only branded, FDA-approved products</div><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Natural, subtle results</div></div></div></div></div>
+  </section>
+</div>
+
+<!-- ===== TREATMENT: GLOW ===== -->
+<div class="page" id="page-treatment-glow">
+  <div class="page-hero"><span class="page-hero-tag">Skin Wellness</span><h1 class="page-hero-title">Skin Glow & <em>Hydration</em></h1><p class="page-hero-sub">Deep nourishment and radiance restoration for dull, dehydrated skin.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <a onclick="navigate('skin-treatments')">Skin</a> › <span>Skin Glow</span></div></div>
+  <section>
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:60px"><div><span class="section-tag">Glow Treatments</span><h2 class="section-title">Your Skin's <em>Best Day, Every Day</em></h2><p style="font-size:16px;color:var(--muted);line-height:1.9;margin-bottom:40px">Our glow protocols go beyond surface-level treatments. We target the dermis and epidermis simultaneously — deeply hydrating, nourishing with vitamins, and stimulating the skin's own renewal processes for a lasting, healthy glow.</p><div class="treatment-steps"><div class="step-card"><div class="step-num">01</div><div class="step-title">HydraFacial MD</div><div class="step-desc">6-step medical facial: cleanse, peel, extract, hydrate, fuse antioxidants, protect. Zero downtime.</div></div><div class="step-card"><div class="step-num">02</div><div class="step-title">Mesotherapy</div><div class="step-desc">Microinjections of vitamins, hyaluronic acid, and nutrients directly into the skin for intense nourishment.</div></div><div class="step-card"><div class="step-num">03</div><div class="step-title">Vitamin C Brightening</div><div class="step-desc">High-dose vitamin C serum infusion combined with iontophoresis for maximum pigment-reducing effect.</div></div><div class="step-card"><div class="step-num">04</div><div class="step-title">Glow Peels</div><div class="step-desc">Lactic, mandelic, or glycolic acid peels tailored to skin sensitivity for instant luminosity and renewal.</div></div></div></div><div class="side-sticky"><div class="booking-side-card"><div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Starting From</div><div class="price-tag">₹3,000</div><div class="price-note">per session</div><button class="btn-primary" style="width:100%;margin-top:24px" onclick="navigate('appointment')">Book Consultation</button><div class="benefit-list"><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Zero downtime options</div><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Instant visible results</div><div class="benefit-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Safe for all skin types</div></div></div></div></div>
+  </section>
+</div>
+
+<!-- ===== PAGE: GALLERY ===== -->
+<div class="page" id="page-gallery">
+  <div class="page-hero"><span class="page-hero-tag">Real Results</span><h1 class="page-hero-title">Before & After <em>Gallery</em></h1><p class="page-hero-sub">Real patients, real results. Every image reflects clinical excellence and genuine care.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>Gallery</span></div></div>
+  <section>
+    <div class="gallery-filters">
+      <button class="filter-btn active" onclick="filterGallery('all',this)">All Results</button>
+      <button class="filter-btn" onclick="filterGallery('acne',this)">Acne & Scars</button>
+      <button class="filter-btn" onclick="filterGallery('hair',this)">Hair Treatments</button>
+      <button class="filter-btn" onclick="filterGallery('laser',this)">Laser</button>
+      <button class="filter-btn" onclick="filterGallery('glow',this)">Skin Glow</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-cat="acne"><img src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">Acne Treatment</div><div class="gallery-label-text">6 Week Clear Skin Protocol</div></div></div>
+      <div class="gallery-item" data-cat="hair"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">PRP Hair Therapy</div><div class="gallery-label-text">3 Month Hair Regrowth</div></div></div>
+      <div class="gallery-item" data-cat="glow"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">Skin Glow</div><div class="gallery-label-text">4 Session Radiance Therapy</div></div></div>
+      <div class="gallery-item" data-cat="laser"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">Laser Resurfacing</div><div class="gallery-label-text">CO₂ Fractional Laser Result</div></div></div>
+      <div class="gallery-item" data-cat="hair"><img src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">Hair Transplant</div><div class="gallery-label-text">2500 Grafts FUE — 12 Months</div></div></div>
+      <div class="gallery-item" data-cat="acne"><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">Scar Revision</div><div class="gallery-label-text">Microneedling + CO₂ Combo</div></div></div>
+      <div class="gallery-item" data-cat="glow"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">Anti-Aging</div><div class="gallery-label-text">Botox + Filler Combo</div></div></div>
+      <div class="gallery-item" data-cat="laser"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">Pigmentation</div><div class="gallery-label-text">Q-Switch Laser — 5 Sessions</div></div></div>
+      <div class="gallery-item" data-cat="hair"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80&auto=format&fit=crop" alt=""><div class="gallery-label"><div class="gallery-label-cat">GFC Treatment</div><div class="gallery-label-text">Hair Density Improvement</div></div></div>
+    </div>
+    <div style="text-align:center;margin-top:48px">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:20px">All before-after images are shared with full patient consent.</p>
+      <button class="btn-primary" onclick="navigate('appointment')">Book Your Transformation →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: TESTIMONIALS ===== -->
+<div class="page" id="page-testimonials">
+  <div class="page-hero"><span class="page-hero-tag">Patient Stories</span><h1 class="page-hero-title">Real <em>Reviews</em></h1><p class="page-hero-sub">Read what our patients say about their experiences at DermaVeda.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>Testimonials</span></div></div>
+  <section>
+    <div style="text-align:center;margin-bottom:48px">
+      <div style="display:inline-flex;align-items:center;gap:16px;background:white;border-radius:var(--radius-lg);padding:20px 40px;box-shadow:var(--shadow-soft)">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;color:var(--charcoal)">4.9</div>
+        <div><div style="color:var(--gold);font-size:24px;letter-spacing:2px">★★★★★</div><div style="font-size:13px;color:var(--muted);margin-top:4px">Based on 847 verified reviews</div></div>
+      </div>
+    </div>
+    <div class="testi-page-grid">
+      <div class="testi-page-card"><div class="testi-page-stars">★★★★★</div><div class="testi-page-quote">"After years struggling with acne, I finally found a doctor who genuinely listened. My skin is completely transformed — I haven't had a single breakout in 6 months."</div><div class="testi-page-author-wrap"><div class="testi-page-avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&fit=crop" alt="Priya"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Priya Mehta</div><div style="font-size:12px;color:var(--sage)">Acne Treatment · April 2025</div></div></div></div>
+      <div class="testi-page-card"><div class="testi-page-stars">★★★★★</div><div class="testi-page-quote">"The PRP hair therapy sessions have given me my confidence back. Visible improvement from the very first session! Dr. Arjun was incredibly thorough."</div><div class="testi-page-author-wrap"><div class="testi-page-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&fit=crop" alt="Rohan"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Rohan Kulkarni</div><div style="font-size:12px;color:var(--sage)">PRP Hair Therapy · March 2025</div></div></div></div>
+      <div class="testi-page-card"><div class="testi-page-stars">★★★★★</div><div class="testi-page-quote">"Dr. Sharma is an absolute artist. My laser results look so natural — no one can tell I've had anything done, they just say I look 'glowing'."</div><div class="testi-page-author-wrap"><div class="testi-page-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80&fit=crop" alt="Ananya"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Ananya Singh</div><div style="font-size:12px;color:var(--sage)">Laser Resurfacing · February 2025</div></div></div></div>
+      <div class="testi-page-card"><div class="testi-page-stars">★★★★★</div><div class="testi-page-quote">"I traveled from Mumbai for my hair transplant at DermaVeda. Worth every kilometer. Dr. Arjun's craftsmanship is exceptional — completely natural-looking hairline."</div><div class="testi-page-author-wrap"><div class="testi-page-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80&fit=crop" alt="Vikram"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Vikram Joshi</div><div style="font-size:12px;color:var(--sage)">Hair Transplant · January 2025</div></div></div></div>
+      <div class="testi-page-card"><div class="testi-page-stars">★★★★★</div><div class="testi-page-quote">"The glow treatment completely refreshed my skin. Everyone is asking what my secret is. I feel like myself again at 45. The whole team is warm and professional."</div><div class="testi-page-author-wrap"><div class="testi-page-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80&fit=crop" alt="Kavitha"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Kavitha Rao</div><div style="font-size:12px;color:var(--sage)">Skin Glow Therapy · December 2024</div></div></div></div>
+      <div class="testi-page-card"><div class="testi-page-stars">★★★★★</div><div class="testi-page-quote">"5 sessions of Botox and fillers with Dr. Sharma. She has a truly artistic eye — conservative, natural, and exactly what I asked for. I won't go anywhere else."</div><div class="testi-page-author-wrap"><div class="testi-page-avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80&fit=crop" alt="Rekha"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Rekha Nair</div><div style="font-size:12px;color:var(--sage)">Botox & Fillers · November 2024</div></div></div></div>
+    </div>
+    <div style="text-align:center;margin-top:48px"><button class="btn-primary" onclick="navigate('appointment')">Join Our Happy Patients →</button></div>
+  </section>
+</div>
+
+<!-- ===== PAGE: BLOG ===== -->
+<div class="page" id="page-blog">
+  <div class="page-hero"><span class="page-hero-tag">Knowledge Hub</span><h1 class="page-hero-title">Expert <em>Insights</em></h1><p class="page-hero-sub">Dermatology tips, treatment guides, and skincare science from our clinical team.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>Blog</span></div></div>
+  <section>
+    <div class="blog-grid">
+      <div class="blog-card" onclick="navigate('blog-post-1')"><div class="blog-img"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80&auto=format&fit=crop" alt="Skincare" loading="lazy"></div><div class="blog-body"><div class="blog-cat">Skincare Science</div><div class="blog-title">The Science Behind Vitamin C Serums: What Actually Works</div><p class="blog-excerpt">Understanding pH stability, concentration, and delivery systems that determine whether your vitamin C serum is effective or wasted.</p><div class="blog-meta"><span class="blog-date">May 2, 2025</span><span class="blog-read">5 min read →</span></div></div></div>
+      <div class="blog-card" onclick="navigate('blog-post-2')"><div class="blog-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&auto=format&fit=crop" alt="Hair" loading="lazy"></div><div class="blog-body"><div class="blog-cat">Hair Care</div><div class="blog-title">PRP vs. Minoxidil: Choosing the Right Hair Loss Treatment for You</div><p class="blog-excerpt">A clinical comparison of the two most popular hair loss treatments — who benefits from each, and when to combine them.</p><div class="blog-meta"><span class="blog-date">April 18, 2025</span><span class="blog-read">7 min read →</span></div></div></div>
+      <div class="blog-card" onclick="navigate('blog-post-3')"><div class="blog-img"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80&auto=format&fit=crop" alt="Anti aging" loading="lazy"></div><div class="blog-body"><div class="blog-cat">Anti-Aging</div><div class="blog-title">Botox at 35: Is Preventive Treatment Right for You?</div><p class="blog-excerpt">The evidence for early intervention in anti-aging, when it makes sense, and what realistic outcomes to expect.</p><div class="blog-meta"><span class="blog-date">April 5, 2025</span><span class="blog-read">6 min read →</span></div></div></div>
+      <div class="blog-card" onclick="navigate('blog-post-1')"><div class="blog-img"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&q=80&auto=format&fit=crop" alt="Sunscreen" loading="lazy"></div><div class="blog-body"><div class="blog-cat">Sun Care</div><div class="blog-title">SPF 30 vs SPF 50: What the Numbers Actually Mean for Indian Skin</div><p class="blog-excerpt">Dermatologist-explained breakdown of SPF ratings, UVA vs UVB, and which sunscreen formula is right for your skin type.</p><div class="blog-meta"><span class="blog-date">March 22, 2025</span><span class="blog-read">4 min read →</span></div></div></div>
+      <div class="blog-card" onclick="navigate('blog-post-2')"><div class="blog-img"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80&auto=format&fit=crop" alt="Diet hair" loading="lazy"></div><div class="blog-body"><div class="blog-cat">Nutrition</div><div class="blog-title">The Diet-Hair Connection: Foods That Actually Help Hair Growth</div><p class="blog-excerpt">Clinical evidence on how iron, biotin, zinc, and protein intake directly affects hair density and growth rate.</p><div class="blog-meta"><span class="blog-date">March 10, 2025</span><span class="blog-read">8 min read →</span></div></div></div>
+      <div class="blog-card" onclick="navigate('blog-post-3')"><div class="blog-img"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&auto=format&fit=crop" alt="Hormones skin" loading="lazy"></div><div class="blog-body"><div class="blog-cat">Medical Dermatology</div><div class="blog-title">How Hormones Affect Your Skin: The PCOS-Acne Connection</div><p class="blog-excerpt">Why treating hormonal acne requires a different approach — and what actually works beyond topical solutions.</p><div class="blog-meta"><span class="blog-date">February 28, 2025</span><span class="blog-read">9 min read →</span></div></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== BLOG POST 1 ===== -->
+<div class="page" id="page-blog-post-1">
+  <div class="page-hero" style="padding:60px 5% 40px"><span class="page-hero-tag">Skincare Science</span><h1 class="page-hero-title" style="font-size:clamp(28px,4vw,52px)">The Science Behind Vitamin C Serums:<br><em>What Actually Works</em></h1><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <a onclick="navigate('blog')">Blog</a> › <span>Vitamin C Serums</span></div></div>
+  <div class="blog-detail-grid">
+    <div class="blog-detail-content">
+      <div class="blog-detail-hero-img"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=1200&q=80&auto=format&fit=crop" alt="Vitamin C skincare"></div>
+      <div class="blog-author-row">
+        <div class="blog-author-avatar"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&q=80&fit=crop" alt="Dr Meera"></div>
+        <div>
+          <div class="blog-author-name">Dr. Meera Sharma</div>
+          <div class="blog-author-role">MD Dermatology · Lead Dermatologist, DermaVeda</div>
+        </div>
+        <div class="blog-meta-row" style="margin-left:auto"><span>May 2, 2025</span><span>5 min read</span></div>
+      </div>
+      <div class="blog-detail-body">
+        <p>Walk into any pharmacy or skincare aisle and you'll find dozens of Vitamin C serums promising brighter skin, reduced pigmentation, and a youthful glow. But as a dermatologist, I can tell you that most of them don't work — not because the ingredient is ineffective, but because the formulation is wrong.</p>
+        <p>Vitamin C (L-ascorbic acid) is one of the most researched skincare actives in dermatology. The evidence for its benefits is robust: it's a powerful antioxidant, it inhibits melanin synthesis (reducing pigmentation), it stimulates collagen production, and it provides meaningful UV protection when combined with sunscreen. The problem lies entirely in delivery.</p>
+        <h2>The pH Problem</h2>
+        <p>L-ascorbic acid is only effective at a skin pH below 3.5. At higher pH levels, the molecule cannot penetrate the skin barrier and is essentially useless — sitting on the surface until it oxidizes.</p>
+        <p>Most commercially available vitamin C serums are formulated at pH 5–7 because they're more stable, feel better on skin, and cause less irritation. They're also ineffective. If a vitamin C serum feels completely comfortable with no tingling whatsoever on first application, it's almost certainly too high in pH to work.</p>
+        <div class="blog-callout">"If a vitamin C serum feels completely comfortable with zero tingling on first use, it's likely too high in pH to penetrate effectively."</div>
+        <h2>Concentration Matters — But There's a Ceiling</h2>
+        <p>Research shows that L-ascorbic acid becomes maximally effective at concentrations between 10–20%. Below 10%, you may see antioxidant benefits but minimal pigmentation or collagen effect. Above 20%, skin irritation increases significantly without proportional benefit — there's a ceiling to how much the skin can absorb.</p>
+        <p>Look for serums in the 15% range for a balance of efficacy and tolerability.</p>
+        <h3>Derivative Forms: Are They Better?</h3>
+        <p>Vitamin C derivatives like sodium ascorbyl phosphate, ascorbyl glucoside, and magnesium ascorbyl phosphate are more stable and gentler — but they must be converted to L-ascorbic acid by skin enzymes to work. This conversion is incomplete and variable, making them generally less potent than well-formulated L-ascorbic acid.</p>
+        <p>That said, for sensitive skin types (including many Indian skin tones prone to post-inflammatory hyperpigmentation), derivatives can be a smarter choice with consistent use.</p>
+        <h2>The Oxidation Problem</h2>
+        <p>Vitamin C oxidizes rapidly when exposed to light, air, and heat. An oxidized vitamin C serum is not only ineffective — it can actually cause yellow-brown discoloration on the skin. If your serum has turned orange or brown in the bottle, it's time to replace it.</p>
+        <p><strong>What to look for:</strong></p>
+        <ul>
+          <li>Dark, airtight packaging (amber glass or airless pump)</li>
+          <li>Small batch sizes you'll use within 1–2 months</li>
+          <li>Ferulic acid in the formula (stabilizes Vitamin C + doubles photoprotection)</li>
+          <li>Vitamin E as a synergistic antioxidant partner</li>
+          <li>Storage away from heat and light</li>
+        </ul>
+        <h2>Our Recommendation</h2>
+        <p>At DermaVeda, we recommend combining a professionally formulated vitamin C serum (pH 2.5–3.5, 15% L-ascorbic acid, with ferulic acid) with our clinical Vitamin C brightening infusion for optimal pigmentation correction in Indian skin.</p>
+        <p>If you're unsure which formulation is right for your skin type and concerns, book a skin analysis consultation — we'll guide you to what will actually work for your specific skin, not just what's trending.</p>
+      </div>
+      <div style="margin-top:40px;padding-top:40px;border-top:1px solid var(--border)">
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <span class="tag">Skincare Science</span><span class="tag">Vitamin C</span><span class="tag">Pigmentation</span><span class="tag">Anti-oxidants</span><span class="tag">Serums</span>
+        </div>
+      </div>
+      <div style="margin-top:40px;background:rgba(139,168,136,0.08);border-radius:var(--radius-md);padding:32px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:8px">Need Personalized Skincare Advice?</div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Book a skin analysis consultation with Dr. Meera Sharma and get a routine built for your exact skin type and concerns.</p>
+        <button class="btn-primary" onclick="navigate('appointment')">Book Consultation →</button>
+      </div>
+    </div>
+    <div class="blog-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">About the Author</div>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px"><div style="width:52px;height:52px;border-radius:50%;overflow:hidden"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&q=80&fit=crop" alt="Dr Meera" style="width:100%;height:100%;object-fit:cover"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Dr. Meera Sharma</div><div style="font-size:12px;color:var(--muted)">MD, DNB · Harvard Fellow</div></div></div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7">Lead Dermatologist and Founder of DermaVeda with 12+ years of clinical experience in dermatology and aesthetic medicine.</p>
+        <button class="btn-outline" style="width:100%;margin-top:16px;padding:10px" onclick="navigate('about-doctor')">Full Profile</button>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">More Articles</div>
+        <div class="recent-post" onclick="navigate('blog-post-2')"><div class="recent-post-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=200&q=80&fit=crop" alt=""></div><div><div class="recent-post-title">PRP vs. Minoxidil: The Right Choice</div><div class="recent-post-date">April 18, 2025</div></div></div>
+        <div class="recent-post" onclick="navigate('blog-post-3')"><div class="recent-post-img"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=200&q=80&fit=crop" alt=""></div><div><div class="recent-post-title">Botox at 35: Preventive Treatment?</div><div class="recent-post-date">April 5, 2025</div></div></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Topics</div>
+        <div class="tag-cloud"><span class="tag">Skincare</span><span class="tag">Hair Loss</span><span class="tag">Laser</span><span class="tag">Acne</span><span class="tag">Anti-aging</span><span class="tag">PRP</span><span class="tag">Botox</span><span class="tag">Suncare</span></div>
+      </div>
+      <div style="background:var(--deep-sage);border-radius:var(--radius-md);padding:28px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:white;margin-bottom:8px">Free Consultation</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:20px">Get personalized advice from our dermatologist.</p>
+        <button class="btn-gold" style="width:100%;padding:12px" onclick="navigate('appointment')">Book Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BLOG POST 2 ===== -->
+<div class="page" id="page-blog-post-2">
+  <div class="page-hero" style="padding:60px 5% 40px"><span class="page-hero-tag">Hair Care</span><h1 class="page-hero-title" style="font-size:clamp(28px,4vw,52px)">PRP vs. Minoxidil:<br><em>Choosing the Right Treatment</em></h1><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <a onclick="navigate('blog')">Blog</a> › <span>PRP vs Minoxidil</span></div></div>
+  <div class="blog-detail-grid">
+    <div class="blog-detail-content">
+      <div class="blog-detail-hero-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1200&q=80&auto=format&fit=crop" alt="Hair care"></div>
+      <div class="blog-author-row"><div class="blog-author-avatar"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=100&q=80&fit=crop" alt="Dr Arjun"></div><div><div class="blog-author-name">Dr. Arjun Patel</div><div class="blog-author-role">Senior Trichologist, DermaVeda</div></div><div class="blog-meta-row" style="margin-left:auto"><span>April 18, 2025</span><span>7 min read</span></div></div>
+      <div class="blog-detail-body">
+        <p>Hair loss affects over 50% of men and 25% of women by age 50, making it one of the most common concerns I see in my clinic every day. Two treatments dominate the conversation: Minoxidil — the over-the-counter topical medication — and PRP (Platelet-Rich Plasma) therapy, an in-clinic procedure using your own blood's growth factors.</p>
+        <p>Both work. Both have solid clinical evidence. But they work differently, and the right choice depends entirely on your type of hair loss, stage, lifestyle, and goals.</p>
+        <h2>How Minoxidil Works</h2>
+        <p>Minoxidil was originally developed as an oral blood pressure medication. The discovery that it caused hair growth was a serendipitous side effect. It works primarily by extending the anagen (growth) phase of the hair cycle and widening blood vessels around the follicle — improving nutrient delivery.</p>
+        <p>It's available as a 2% or 5% topical solution or foam, applied once or twice daily. The results are real but require continuous use: stop Minoxidil, and the hair gained typically falls out within 3–6 months.</p>
+        <div class="blog-callout">"Minoxidil requires lifelong commitment. PRP stimulates your follicles' own biology — the results are more durable."</div>
+        <h2>How PRP Works</h2>
+        <p>PRP contains concentrated growth factors including PDGF, TGF-β, VEGF, and IGF — all of which play active roles in follicle stimulation and hair cycle regulation. When injected into the scalp, these growth factors activate dormant follicles, reduce inflammation, and strengthen existing hair from root to tip.</p>
+        <p>Unlike Minoxidil, PRP doesn't require daily application. A course of 3–6 sessions is followed by maintenance sessions every 6–12 months — making compliance much easier for patients who struggle with daily topical routines.</p>
+        <h3>Side-by-Side Comparison</h3>
+        <ul>
+          <li><strong>Minoxidil:</strong> Daily application required · OTC availability · Cheaper per month · Shedding on cessation</li>
+          <li><strong>PRP:</strong> 3–6 clinic sessions · Prescription not needed · Higher upfront cost · More durable results</li>
+          <li><strong>Best combined:</strong> For moderate-to-severe hair loss, combining both yields superior results to either alone</li>
+        </ul>
+        <h2>Who Should Choose What</h2>
+        <p>Choose Minoxidil if: you're in the early stages of hair loss, you're comfortable with a daily routine, or you need a low-cost starting point while awaiting consultation.</p>
+        <p>Choose PRP if: you've tried Minoxidil with partial results, you want a more natural approach, your hair loss is moderate, or you're a poor Minoxidil complier. PRP is also excellent as a post-hair-transplant accelerant.</p>
+        <p>Consider combining both if: your hair loss is significant and you want maximum results in the shortest possible time.</p>
+        <p>The most important step is getting a proper trichoscopy evaluation first — to determine whether your follicles are still viable, which directly affects whether any medical treatment will work.</p>
+      </div>
+      <div style="margin-top:40px;background:rgba(139,168,136,0.08);border-radius:var(--radius-md);padding:32px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:8px">Start Your Hair Recovery Journey</div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Book a trichoscopy + consultation to get a personalized hair loss treatment plan.</p>
+        <button class="btn-primary" onclick="navigate('appointment')">Book Hair Consultation →</button>
+      </div>
+    </div>
+    <div class="blog-sidebar">
+      <div class="sidebar-card"><div class="sidebar-card-title">About the Author</div><div style="display:flex;gap:12px;align-items:center;margin-bottom:12px"><div style="width:52px;height:52px;border-radius:50%;overflow:hidden"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=100&q=80&fit=crop" alt="Dr Arjun" style="width:100%;height:100%;object-fit:cover"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Dr. Arjun Patel</div><div style="font-size:12px;color:var(--muted)">MS, MBBS · Senior Trichologist</div></div></div><p style="font-size:13px;color:var(--muted);line-height:1.7">Hair transplant and hair loss specialist with 9 years of experience and over 500 successful FUE procedures performed.</p></div>
+      <div class="sidebar-card"><div class="sidebar-card-title">Related Articles</div><div class="recent-post" onclick="navigate('blog-post-1')"><div class="recent-post-img"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=200&q=80&fit=crop" alt=""></div><div><div class="recent-post-title">Vitamin C Serums: What Works</div><div class="recent-post-date">May 2, 2025</div></div></div><div class="recent-post" onclick="navigate('blog-post-3')"><div class="recent-post-img"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=200&q=80&fit=crop" alt=""></div><div><div class="recent-post-title">Botox at 35: Is It Right?</div><div class="recent-post-date">April 5, 2025</div></div></div></div>
+      <div style="background:var(--deep-sage);border-radius:var(--radius-md);padding:28px;text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:white;margin-bottom:8px">Hair Analysis</div><p style="font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:20px">Get a trichoscopy + expert consultation.</p><button class="btn-gold" style="width:100%;padding:12px" onclick="navigate('appointment')">Book Now</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BLOG POST 3 ===== -->
+<div class="page" id="page-blog-post-3">
+  <div class="page-hero" style="padding:60px 5% 40px"><span class="page-hero-tag">Anti-Aging</span><h1 class="page-hero-title" style="font-size:clamp(28px,4vw,52px)">Botox at 35:<br><em>Is Preventive Treatment Right for You?</em></h1><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <a onclick="navigate('blog')">Blog</a> › <span>Botox at 35</span></div></div>
+  <div class="blog-detail-grid">
+    <div class="blog-detail-content">
+      <div class="blog-detail-hero-img"><img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=1200&q=80&auto=format&fit=crop" alt="Anti-aging"></div>
+      <div class="blog-author-row"><div class="blog-author-avatar"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&q=80&fit=crop" alt="Dr Meera"></div><div><div class="blog-author-name">Dr. Meera Sharma</div><div class="blog-author-role">MD Dermatology · Lead Dermatologist</div></div><div class="blog-meta-row" style="margin-left:auto"><span>April 5, 2025</span><span>6 min read</span></div></div>
+      <div class="blog-detail-body">
+        <p>The age of Botox has shifted significantly over the past decade. When I began my dermatology practice in 2012, the average patient seeking Botox was in their late 40s or early 50s, looking to soften well-established lines. Today, I regularly see patients in their late 20s and 30s asking about "preventive" Botox — and many of them are asking the right question.</p>
+        <h2>What Is Preventive Botox?</h2>
+        <p>Preventive (or "Baby") Botox refers to the use of small doses of botulinum toxin to relax facial muscles before deep static lines form. The logic is elegant: wrinkles form because muscles repeatedly contract over decades, eventually creasing the overlying skin permanently. If you reduce those contractions earlier, you prevent those permanent creases from forming in the first place.</p>
+        <p>The science supports this. A 2018 study following identical twins (one treated with Botox, one not) over 13 years found that the treated twin had significantly fewer and shallower wrinkles by the study's end.</p>
+        <div class="blog-callout">"Prevention is always easier than correction. In anti-aging dermatology, starting earlier means needing less treatment later."</div>
+        <h2>Who Is a Good Candidate at 35?</h2>
+        <p>Not everyone at 35 needs Botox — and a good dermatologist will tell you honestly if you don't. Signs that preventive Botox might be right for you:</p>
+        <ul>
+          <li>You're seeing early expression lines at rest (lines visible even when your face is relaxed)</li>
+          <li>You have strong muscle activity in the forehead or between the brows</li>
+          <li>You have a family history of early deep forehead or glabellar lines</li>
+          <li>You squint frequently due to sun exposure or screen work</li>
+          <li>You've maximized sun protection and skincare and want an additional tool</li>
+        </ul>
+        <h2>What to Expect from Baby Botox</h2>
+        <p>At a preventive dose, the goal is not to eliminate all movement — it's to soften it. You should still be able to raise your eyebrows, show surprise, and express emotion naturally. The aim is a 30–50% reduction in muscle movement in targeted areas, not paralysis.</p>
+        <p>Treatment takes 15–20 minutes. Results appear in 3–5 days and last 4–6 months. Because preventive doses are lower, touch-ups may be needed slightly more frequently than therapeutic doses in older patients.</p>
+        <h2>Is It Safe Long-Term?</h2>
+        <p>Botulinum toxin has been used in medicine for over 40 years and in cosmetic dermatology for over 25 years. Its safety profile is excellent when administered by a qualified physician. The concern about muscle atrophy with long-term use is real but rarely clinically significant at cosmetic doses.</p>
+        <p>My recommendation: start conservative, maintain realistic expectations, and work with a doctor who will say "you don't need it yet" when that's the honest answer.</p>
+      </div>
+      <div style="margin-top:40px;background:rgba(139,168,136,0.08);border-radius:var(--radius-md);padding:32px;text-align:center">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:8px">Considering Botox? Let's Talk.</div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Book an honest anti-aging consultation — we'll tell you exactly what you need and what you don't.</p>
+        <button class="btn-primary" onclick="navigate('appointment')">Book Anti-Aging Consultation →</button>
+      </div>
+    </div>
+    <div class="blog-sidebar">
+      <div class="sidebar-card"><div class="sidebar-card-title">About the Author</div><div style="display:flex;gap:12px;align-items:center;margin-bottom:12px"><div style="width:52px;height:52px;border-radius:50%;overflow:hidden"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&q=80&fit=crop" alt="Dr Meera" style="width:100%;height:100%;object-fit:cover"></div><div><div style="font-size:14px;font-weight:600;color:var(--charcoal)">Dr. Meera Sharma</div><div style="font-size:12px;color:var(--muted)">MD, DNB · Harvard Fellow</div></div></div><p style="font-size:13px;color:var(--muted);line-height:1.7">12+ years of expertise in medical and aesthetic dermatology with a philosophy of natural, conservative results.</p></div>
+      <div class="sidebar-card"><div class="sidebar-card-title">Related Articles</div><div class="recent-post" onclick="navigate('blog-post-1')"><div class="recent-post-img"><img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=200&q=80&fit=crop" alt=""></div><div><div class="recent-post-title">Vitamin C Serums: What Works</div><div class="recent-post-date">May 2, 2025</div></div></div><div class="recent-post" onclick="navigate('blog-post-2')"><div class="recent-post-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=200&q=80&fit=crop" alt=""></div><div><div class="recent-post-title">PRP vs. Minoxidil Comparison</div><div class="recent-post-date">April 18, 2025</div></div></div></div>
+      <div style="background:var(--deep-sage);border-radius:var(--radius-md);padding:28px;text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:white;margin-bottom:8px">Anti-Aging Consult</div><p style="font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:20px">Personalized advice on Botox, fillers & more.</p><button class="btn-gold" style="width:100%;padding:12px" onclick="navigate('appointment')">Book Now</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE: FAQ ===== -->
+<div class="page" id="page-faq">
+  <div class="page-hero"><span class="page-hero-tag">Quick Answers</span><h1 class="page-hero-title">Frequently Asked <em>Questions</em></h1><p class="page-hero-sub">Everything you need to know before your first visit.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>FAQ</span></div></div>
+  <section style="background:var(--cream)">
+    <div class="faq-wrap">
+      <div><span class="section-tag">Got Questions?</span><h2 class="section-title">We Have <em>Answers</em></h2><p class="section-sub">Can't find what you're looking for? Call us at <strong style="color:var(--deep-sage)">+91 98765 43210</strong></p><div style="margin-top:32px"><button class="btn-primary" onclick="navigate('appointment')">Book Free Consultation</button></div></div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How many PRP sessions do I need for hair growth?<svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Most patients see significant results after 3–4 sessions spaced 4 weeks apart. We then recommend 1–2 maintenance sessions per year. Your plan depends on the degree of hair loss and scalp response.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is laser treatment safe for Indian skin tones?<svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Yes, absolutely. We use lasers specifically optimized for Fitzpatrick types IV–VI. Our team is highly experienced with Indian skin and takes extra precautions to minimize post-inflammatory hyperpigmentation risk.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the downtime after hair transplant?<svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">With FUE, most patients return to desk work within 3–5 days. You'll see initial shedding around week 2–6, which is completely normal. New hair growth begins around month 3–4, with full results at 12 months.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are EMI options available for treatments?<svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Yes. We offer 0% interest EMI for 3, 6, and 12 months on all major procedures. Our counselor will walk you through options during your consultation.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you offer online / video consultations?<svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Yes, we offer video consultations for patients outside Pune. You can discuss your concerns, share photos, and get a preliminary assessment. Book via our appointment form and select "Online Consultation".</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I prepare for my first appointment?<svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Come with a clean face (no makeup). Bring any previous prescription medications, test reports, or skincare products you're currently using. Note down all your concerns and questions beforehand. That's it!</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What skin types do you treat?<svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">We treat all skin types and Fitzpatrick skin tones I–VI. We specialize in Indian skin and have extensive expertise in conditions common to South Asian patients including post-inflammatory hyperpigmentation, melasma, and darker skin tone acne.</div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is your clinic NABH accredited?<svg class="faq-icon" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a">Yes. DermaVeda is NABH (National Accreditation Board for Hospitals) accredited, ensuring the highest standards of patient safety, hygiene, and clinical quality. All equipment is regularly certified and sterilized.</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: APPOINTMENT ===== -->
+<div class="page" id="page-appointment">
+  <div class="page-hero"><span class="page-hero-tag">Get Started</span><h1 class="page-hero-title">Book Your <em>Appointment</em></h1><p class="page-hero-sub">Fill the form below and our team will confirm your slot within 2 hours.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>Appointment</span></div></div>
+  <section class="booking-section" style="padding:80px 5%">
+    <div class="booking-wrap">
+      <div class="booking-info">
+        <span class="section-tag">Why DermaVeda?</span>
+        <h2 class="section-title">Your Skin Journey<br><em>Starts Here</em></h2>
+        <p class="section-sub">We make it easy to get started — no wait lists, no complicated process. Just book and we'll take care of the rest.</p>
+        <div class="booking-features" style="margin-top:32px">
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free initial consultation assessment</div>
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Personalized treatment plan</div>
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Flexible scheduling — weekdays & weekends</div>
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Online video consultations available</div>
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>0% EMI on all treatment packages</div>
+          <div class="booking-feat"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% confidential and private</div>
+        </div>
+        <div style="margin-top:40px;background:rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:24px">
+          <div style="font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:12px">Clinic Hours</div>
+          <div style="font-size:15px;color:white;margin-bottom:6px">Monday – Friday: 10:00 AM – 7:00 PM</div>
+          <div style="font-size:15px;color:white;margin-bottom:6px">Saturday: 9:00 AM – 5:00 PM</div>
+          <div style="font-size:15px;color:rgba(255,255,255,0.6)">Sunday: Closed</div>
+        </div>
+      </div>
+      <div class="booking-form-wrap">
+        <div class="form-title">Request Your Appointment</div>
+        <form id="mainBookingForm" onsubmit="submitToSheet(event)">
+          <div class="form-grid">
+            <div class="form-group"><label class="form-label">Full Name *</label><input type="text" class="form-control" placeholder="Your full name" required id="bf-name"></div>
+            <div class="form-group"><label class="form-label">Phone *</label><input type="tel" class="form-control" placeholder="+91 9876543210" required id="bf-phone"></div>
+            <div class="form-group full"><label class="form-label">Email Address</label><input type="email" class="form-control" placeholder="your@email.com" id="bf-email"></div>
+            <div class="form-group full"><label class="form-label">Consultation Type</label><select class="form-control" id="bf-type"><option>In-Clinic Consultation</option><option>Online Video Consultation</option></select></div>
+            <div class="form-group full"><label class="form-label">Treatment Interest *</label><select class="form-control" required id="bf-treatment"><option value="">Select a treatment</option><option>Acne & Scar Treatment</option><option>PRP Hair Therapy</option><option>Hair Transplant (FUE/FUT)</option><option>Laser Skin Resurfacing</option><option>Anti-Aging (Botox/Fillers)</option><option>Skin Glow & Hydration</option><option>GFC Hair Treatment</option><option>Scalp Micropigmentation</option><option>General Dermatology</option><option>Other</option></select></div>
+            <div class="form-group"><label class="form-label">Preferred Date</label><input type="date" class="form-control" id="bf-date"></div>
+            <div class="form-group"><label class="form-label">Preferred Time</label><select class="form-control" id="bf-time"><option value="">Select time</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option></select></div>
+            <div class="form-group full"><label class="form-label">Tell Us About Your Concern</label><textarea class="form-control" placeholder="Describe your skin or hair concern, how long you've had it, and any treatments you've tried before..." id="bf-msg"></textarea></div>
+            <div class="form-group full"><label class="form-label">How Did You Hear About Us?</label><select class="form-control" id="bf-source"><option value="">Select</option><option>Google Search</option><option>Instagram</option><option>Facebook</option><option>Friend / Family Referral</option><option>Doctor Referral</option><option>Other</option></select></div>
+          </div>
+          <button type="submit" class="form-submit" id="mainSubmitBtn">Book My Consultation →</button>
+          <div id="mainSuccessMsg" class="success-msg">✓ Your appointment request has been submitted! We'll call you within 2 hours to confirm your slot.</div>
+          <p class="form-note">🔒 Your information is 100% confidential and secure</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: CONTACT ===== -->
+<div class="page" id="page-contact">
+  <div class="page-hero"><span class="page-hero-tag">Reach Us</span><h1 class="page-hero-title">Get in <em>Touch</em></h1><p class="page-hero-sub">We'd love to hear from you. Reach out via any channel below.</p><div class="breadcrumb"><a onclick="navigate('home')">Home</a> › <span>Contact</span></div></div>
+  <section>
+    <div class="contact-grid">
+      <div>
+        <span class="section-tag">Contact Information</span>
+        <h2 class="section-title">Visit <em>DermaVeda</em></h2>
+        <div class="contact-info-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="contact-info-label">Clinic Address</div><div class="contact-info-val">DermaVeda Skin & Hair Clinic<br>Shop 4, Orchid Towers, North Main Road<br>Koregaon Park, Pune – 411001</div></div></div>
+        <div class="contact-info-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><div><div class="contact-info-label">Phone & WhatsApp</div><div class="contact-info-val">+91 98765 43210<br>+91 98765 43211 (WhatsApp)</div></div></div>
+        <div class="contact-info-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="contact-info-label">Email</div><div class="contact-info-val">hello@dermaveda.in<br>appointments@dermaveda.in</div></div></div>
+        <div class="contact-info-item"><div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="contact-info-label">Clinic Hours</div><div class="contact-info-val">Mon – Fri: 10:00 AM – 7:00 PM<br>Saturday: 9:00 AM – 5:00 PM<br>Sunday: Closed</div></div></div>
+        <div class="map-embed"><div style="text-align:center;color:var(--muted)"><div style="font-size:36px;margin-bottom:8px">📍</div><div style="font-size:14px;font-weight:500">Koregaon Park, Pune</div><div style="font-size:13px;margin-top:4px">Map will load here (embed Google Maps iframe)</div></div></div>
+      </div>
+      <div>
+        <div class="booking-form-wrap" style="box-shadow:var(--shadow-soft);background:white">
+          <div class="form-title">Send Us a Message</div>
+          <form onsubmit="submitContact(event)">
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div class="form-group"><label class="form-label">Full Name *</label><input type="text" class="form-control" placeholder="Your name" required></div>
+              <div class="form-group"><label class="form-label">Phone *</label><input type="tel" class="form-control" placeholder="+91 9876543210" required></div>
+              <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" placeholder="your@email.com"></div>
+              <div class="form-group"><label class="form-label">Subject</label><select class="form-control"><option>General Enquiry</option><option>Appointment Request</option><option>Treatment Information</option><option>Pricing & Packages</option><option>Feedback / Complaint</option></select></div>
+              <div class="form-group"><label class="form-label">Message *</label><textarea class="form-control" placeholder="Your message..." required style="min-height:120px"></textarea></div>
+              <button type="submit" class="form-submit" id="contactSubmitBtn">Send Message →</button>
+              <div id="contactSuccess" class="success-msg">✓ Message sent! We'll get back to you within 24 hours.</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Derma<span>Veda</span></div>
+      <p class="footer-desc">Pune's most trusted destination for advanced skin and hair treatments, blending clinical expertise with genuine patient care since 2012.</p>
+      <div class="footer-socials">
+        <button class="social-btn"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></button>
+        <button class="social-btn"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></button>
+        <button class="social-btn"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></button>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <div class="footer-links">
+        <a onclick="navigate('about-clinic')">About Clinic</a>
+        <a onclick="navigate('about-doctor')">About Doctor</a>
+        <a onclick="navigate('gallery')">Before & After</a>
+        <a onclick="navigate('testimonials')">Testimonials</a>
+        <a onclick="navigate('blog')">Blog</a>
+        <a onclick="navigate('faq')">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Treatments</div>
+      <div class="footer-links">
+        <a onclick="navigate('treatment-acne')">Acne Treatment</a>
+        <a onclick="navigate('treatment-prp')">PRP Hair Therapy</a>
+        <a onclick="navigate('treatment-transplant')">Hair Transplant</a>
+        <a onclick="navigate('treatment-laser')">Laser Treatment</a>
+        <a onclick="navigate('treatment-antiaging')">Anti-Aging</a>
+        <a onclick="navigate('treatment-glow')">Skin Glow</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-links">
+        <a>📍 Koregaon Park, Pune – 411001</a>
+        <a href="tel:+919876543210">📞 +91 98765 43210</a>
+        <a href="mailto:hello@dermaveda.in">✉ hello@dermaveda.in</a>
+        <a>⏰ Mon–Sat: 10am – 7pm</a>
+        <a onclick="navigate('appointment')">🗓 Book Online</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 DermaVeda Skin & Hair Clinic, Pune. All rights reserved.</span>
+    <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a> · <a href="#">Sitemap</a></span>
+  </div>
+</footer>
+
+<!-- Floating Book Button -->
+<button class="floating-book" onclick="navigate('appointment')">
+  <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+  Book Now
+</button>
+
+<script>
+// ===== GOOGLE SHEETS URL =====
+// REPLACE THIS URL with your Google Apps Script Web App URL after deployment
+// ⚠️ REPLACE with your Google Apps Script Web App URL
+// SETUP GUIDE:
+//   1. Open your Google Sheet → Extensions → Apps Script
+//   2. Paste this doPost function:
+//      function doPost(e){
+//        var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+//        var d = e.parameter;
+//        sheet.appendRow([new Date(), d.name, d.phone, d.email, d.treatment, d.date, d.time, d.message, d.source, d.type]);
+//        return ContentService.createTextOutput("OK");
+//      }
+//   3. Click Deploy → New Deployment → Web App → Execute as: Me → Who has access: Anyone → Deploy
+//   4. Copy the Web App URL and paste below
+const SHEET_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec";
+
+// ===== ROUTER =====
+let currentPage = 'home';
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
+  if (target) {
+    target.classList.add('active');
+    target.classList.add('page-transition');
+    setTimeout(() => target.classList.remove('page-transition'), 500);
+    currentPage = page;
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    updateActiveLinks(page);
+    initPageAnimations();
+    // Nav background: transparent on home, solid on inner pages
+    const nav = document.getElementById('mainNav');
+    if (page === 'home') {
+      nav.classList.remove('solid');
+    } else {
+      nav.classList.add('solid');
+      nav.classList.remove('scrolled');
+    }
+  }
+}
+
+function updateActiveLinks(page) {
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.remove('active-link');
+    if (a.dataset.page === page) a.classList.add('active-link');
+  });
+}
+
+// ===== NAV SCROLL =====
+window.addEventListener('scroll', () => {
+  if (currentPage === 'home') {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+  }
+});
+
+// ===== MOBILE NAV =====
+function toggleMobile() {
+  document.getElementById('mobileNav').classList.toggle('open');
+}
+
+// ===== FAQ TOGGLE =====
+function toggleFaq(btn) {
+  const isActive = btn.classList.contains('active');
+  document.querySelectorAll('.faq-q').forEach(q => q.classList.remove('active'));
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  if (!isActive) { btn.classList.add('active'); btn.nextElementSibling.classList.add('open'); }
+}
+
+// ===== GALLERY FILTER =====
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    if (cat === 'all' || item.dataset.cat === cat) {
+      item.style.display = 'block';
+      gsap.fromTo(item, {opacity:0, scale:0.95}, {opacity:1, scale:1, duration:0.4, ease:'power2.out'});
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+// ===== FORM SUBMIT TO GOOGLE SHEETS =====
+function submitToSheet(e) {
+  e.preventDefault();
+  const btn = document.getElementById('mainSubmitBtn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  const data = {
+    name: document.getElementById('bf-name').value,
+    phone: document.getElementById('bf-phone').value,
+    email: document.getElementById('bf-email').value,
+    type: document.getElementById('bf-type').value,
+    treatment: document.getElementById('bf-treatment').value,
+    date: document.getElementById('bf-date').value,
+    time: document.getElementById('bf-time').value,
+    message: document.getElementById('bf-msg').value,
+    source: document.getElementById('bf-source').value,
+    timestamp: new Date().toLocaleString('en-IN')
+  };
+
+  // Submit to Google Sheets via FormData (works with no-cors)
+  const fd = new FormData();
+  Object.entries(data).forEach(([k,v]) => fd.append(k, v));
+  fetch(SHEET_URL, { method:'POST', mode:'no-cors', body: fd })
+    .catch(() => {})
+    .finally(() => {
+      btn.style.display = 'none';
+      document.getElementById('mainSuccessMsg').style.display = 'block';
+      document.getElementById('mainBookingForm').reset();
+    });
+}
+
+function submitContact(e) {
+  e.preventDefault();
+  const btn = document.getElementById('contactSubmitBtn');
+  const originalText = btn.textContent;
+  btn.textContent = 'Sending...'; btn.disabled = true;
+  const fd = new FormData(e.target);
+  fd.append('form_type', 'contact');
+  fd.append('timestamp', new Date().toLocaleString('en-IN'));
+  fetch(SHEET_URL, { method:'POST', mode:'no-cors', body: fd })
+    .catch(() => {})
+    .finally(() => {
+      btn.style.display = 'none';
+      document.getElementById('contactSuccess').style.display = 'block';
+      e.target.reset();
+    });
+}
+
+// ===== COUNTER ANIMATION =====
+function animateCounters(container) {
+  container = container || document;
+  container.querySelectorAll('.counter').forEach(el => {
+    if (el.dataset.done) return;
+    el.dataset.done = 1;
+    const target = parseInt(el.dataset.target);
+    const obj = { val: 0 };
+    gsap.to(obj, { val: target, duration: 2.5, ease: 'power2.out', onUpdate: () => { el.textContent = Math.round(obj.val).toLocaleString(); } });
+  });
+  container.querySelectorAll('.h-count').forEach(el => {
+    if (el.dataset.done) return;
+    el.dataset.done = 1;
+    const target = parseInt(el.dataset.t);
+    const obj = { val: 0 };
+    gsap.to(obj, { val: target, duration: 2, ease: 'power2.out', delay: 0.5, onUpdate: () => { el.textContent = Math.round(obj.val).toLocaleString(); } });
+  });
+}
+
+// ===== GSAP PAGE ANIMATIONS =====
+gsap.registerPlugin(ScrollTrigger);
+function initPageAnimations() {
+  setTimeout(() => {
+    gsap.utils.toArray('.reveal').forEach(el => {
+      if (el._gsapTriggered) return;
+      el._gsapTriggered = true;
+      gsap.fromTo(el, {opacity:0, y:35}, {opacity:1, y:0, duration:0.9, ease:'power2.out',
+        scrollTrigger:{trigger:el, start:'top 88%', toggleActions:'play none none none'}});
+    });
+    gsap.utils.toArray('.reveal-left').forEach(el => {
+      if (el._gsapTriggered) return; el._gsapTriggered = true;
+      gsap.fromTo(el, {opacity:0, x:-40}, {opacity:1, x:0, duration:1, ease:'power2.out',
+        scrollTrigger:{trigger:el, start:'top 85%', toggleActions:'play none none none'}});
+    });
+    gsap.utils.toArray('.reveal-right').forEach(el => {
+      if (el._gsapTriggered) return; el._gsapTriggered = true;
+      gsap.fromTo(el, {opacity:0, x:40}, {opacity:1, x:0, duration:1, ease:'power2.out',
+        scrollTrigger:{trigger:el, start:'top 85%', toggleActions:'play none none none'}});
+    });
+    gsap.utils.toArray('.stagger-child').forEach((el, i) => {
+      if (el._gsapTriggered) return; el._gsapTriggered = true;
+      gsap.fromTo(el, {opacity:0, y:30}, {opacity:1, y:0, duration:0.7, delay:i*0.08, ease:'power2.out',
+        scrollTrigger:{trigger:el, start:'top 88%', toggleActions:'play none none none'}});
+    });
+    animateCounters();
+  }, 100);
+}
+
+// ===== HERO ENTRANCE =====
+function heroEntrance() {
+  gsap.from('.hero-badge', {duration:0.8, opacity:0, y:-20, delay:0.2});
+  gsap.from('.hero-title', {duration:1, opacity:0, y:40, delay:0.4});
+  gsap.from('.hero-subtitle', {duration:0.8, opacity:0, y:20, delay:0.7});
+  gsap.from('.hero-actions', {duration:0.8, opacity:0, y:20, delay:0.9});
+  gsap.from('.hero-trust', {duration:0.8, opacity:0, y:20, delay:1.1});
+  gsap.from('.hero-visual', {duration:1.2, opacity:0, x:60, delay:0.3, ease:'power3.out'});
+  gsap.from('.c1', {duration:0.8, opacity:0, y:30, delay:1.3});
+  gsap.from('.c2', {duration:0.8, opacity:0, y:-30, delay:1.5});
+  gsap.to('.c1', {y:-8, duration:2.5, repeat:-1, yoyo:true, ease:'sine.inOut', delay:2});
+  gsap.to('.c2', {y:8, duration:3, repeat:-1, yoyo:true, ease:'sine.inOut', delay:2.5});
+  animateCounters();
+}
+
+// ===== CARD TILT =====
+document.querySelectorAll('.treatment-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width/2) / r.width;
+    const y = (e.clientY - r.top - r.height/2) / r.height;
+    gsap.to(card, {rotateY:x*4, rotateX:-y*4, duration:0.4, ease:'power2.out', transformPerspective:800});
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, {rotateY:0, rotateX:0, duration:0.6, ease:'power2.out'});
+  });
+});
+
+// ===== SET MIN DATE =====
+document.querySelectorAll('input[type=date]').forEach(el => {
+  el.min = new Date().toISOString().split('T')[0];
+});
+
+// ===== INIT =====
+heroEntrance();
+initPageAnimations();
+</script>
+</body>
+</html>
